@@ -7,7 +7,8 @@ class App extends React.Component {
   state = {
     alcName: "",
     alcApiRes: {},
-    suggestion: ""
+    suggestion: "",
+    saved: {}
   };
 
   getAlcName = newAlc => {
@@ -46,6 +47,12 @@ class App extends React.Component {
     });
   };
 
+  saveAlc = (key, id) => {
+    let currentSaved = { ...this.state.saved };
+    currentSaved[key.id] = key[key.id];
+    console.log(currentSaved);
+  };
+
   render() {
     return (
       <div>
@@ -59,7 +66,10 @@ class App extends React.Component {
           clearSuggestion={this.clearSuggestion}
         />
         {this.state.alcApiRes.length ? (
-          <DisplaySearchedAlc alcApiRes={this.state.alcApiRes} />
+          <DisplaySearchedAlc
+            alcApiRes={this.state.alcApiRes}
+            saveAlc={this.saveAlc}
+          />
         ) : null}
         {this.state.suggestion.length ? (
           <DisplaySuggestion
