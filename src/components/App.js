@@ -3,14 +3,47 @@ import SimpleSearch from "./SimpleSearch";
 import DisplaySearchedAlc from "./DisplaySearchedAlc";
 import DisplaySuggestion from "./DisplaySuggestion";
 import CheckoutMenu from "./CheckoutMenu";
+import BeerFridge from "./BeerFridge";
+import base from "../base";
 
 class App extends React.Component {
   state = {
     alcName: "",
     alcApiRes: {},
     suggestion: "",
-    checkout: {}
+    checkout: {},
+    fridge: {}
   };
+
+  componentDidUpdate() {
+    localStorage.setItem(
+      this.props.match.params.houseId,
+      JSON.stringify(this.state.checkout)
+    );
+  }
+
+  componentDidMount() {
+    //Local Storage
+    const { params } = this.props.match;
+    const localStorageRef = localStorage.getItem(params.houseId);
+    if (localStorageRef) {
+      this.setState({
+        checkout: JSON.parse(localStorageRef)
+      });
+    }
+    console.log(this.state.checkout);
+
+    //Firebase
+    this.ref = base.syncState(`${params.houseId}/fridge`, {
+      context: this,
+      state: "fridge"
+    });
+  }
+
+  componentWillUnmount() {
+    //Prevent firebase memory leak
+    base.removeBinding(this.ref);
+  }
 
   getAlcName = newAlc => {
     let currentAlc = this.state.alcName;
@@ -102,11 +135,22 @@ class App extends React.Component {
     });
   };
 
+  saveToFridge = () => {
+    const checkout = { ...this.state.checkout };
+    let fridge = checkout;
+    this.setState({
+      fridge: fridge
+    });
+    console.log(this.state.fridge);
+  };
+
   render() {
     return (
       <div>
-        <h2>Ty Ackerman</h2>
-        <p>Let's goooooooo</p>
+        <h1>Beer Fridge</h1>
+        {this.objectHasContent(this.state.fridge) ? (
+          <BeerFridge fridge={this.state.fridge} />
+        ) : null}
         <SimpleSearch
           getAlcName={this.getAlcName}
           alcSearchRes={this.alcSearchRes}
@@ -135,6 +179,7 @@ class App extends React.Component {
             checkout={this.state.checkout}
             changeQuantCheckout={this.changeQuantCheckout}
             removeFromCheckout={this.removeFromCheckout}
+            saveToFridge={this.saveToFridge}
           />
         ) : null}
       </div>

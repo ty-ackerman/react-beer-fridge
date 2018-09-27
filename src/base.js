@@ -4,9 +4,9 @@ import firebase from "firebase";
 //This is a template for when I want to start using firebase
 
 const firebaseApp = firebase.initializeApp({
-  //   apiKey: "AIzaSyCTQ-FHIamvXvkXqizFpBXR2EXCQAvr6I4",
-  //   authDomain: "catch-of-the-day-ty.firebaseapp.com",
-  //   databaseURL: "https://test.firebaseio.com"
+  apiKey: "AIzaSyDYs2__-lYzhn9TiohUudM1DVf8gGpUasI",
+  authDomain: "beer-fridge-react.firebaseapp.com",
+  databaseURL: "https://beer-fridge-react.firebaseio.com"
 });
 
 const base = Rebase.createClass(firebaseApp.database());

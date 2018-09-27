@@ -2,6 +2,10 @@ import React from "react";
 import CheckoutOneAlc from "./CheckoutOneAlc";
 
 class CheckoutMenu extends React.Component {
+  handleClick = () => {
+    this.props.saveToFridge();
+  };
+
   render() {
     return (
       <div>
@@ -17,7 +21,7 @@ class CheckoutMenu extends React.Component {
             />
           );
         })}
-        <button>Put it on ice!</button>
+        <button onClick={this.handleClick}>Put it on ice!</button>
       </div>
     );
   }
