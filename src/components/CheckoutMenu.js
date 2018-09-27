@@ -13,6 +13,7 @@ class CheckoutMenu extends React.Component {
               checkout={this.props.checkout}
               index={key}
               increaseQuantCheckout={this.props.changeQuantCheckout}
+              removeFromCheckout={this.props.removeFromCheckout}
             />
           );
         })}

@@ -14,6 +14,11 @@ class CheckoutOneAlc extends React.Component {
     this.props.increaseQuantCheckout(index, quant);
   };
 
+  handleRemove = () => {
+    const index = this.props.index;
+    this.props.removeFromCheckout(index);
+  };
+
   render() {
     const { price_in_cents, purchase_quantity, name } = this.props.checkout[
       this.props.index
@@ -41,7 +46,7 @@ class CheckoutOneAlc extends React.Component {
             +
           </button>
         </div>
-        <button>Remove</button>
+        <button onClick={this.handleRemove}>Remove</button>
       </div>
     );
   }

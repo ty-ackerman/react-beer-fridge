@@ -16,6 +16,8 @@ class DisplaySearchedAlc extends React.Component {
                 key={key.id}
                 index={key}
                 saveCheckout={this.props.saveCheckout}
+                checkout={this.props.checkout}
+                objectHasContent={this.props.objectHasContent}
               />
             );
           })}

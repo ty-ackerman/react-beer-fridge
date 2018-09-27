@@ -24,6 +24,14 @@ class App extends React.Component {
     let currentSearch = { ...this.state.alcApiRes };
     if (alcName.length) {
       currentSearch = newSearchRes;
+      currentSearch.map(key => {
+        key["in_checkout"] = false;
+        Object.keys(this.state.checkout).map(checkoutKey => {
+          if (checkoutKey == key.id) {
+            key["in_checkout"] = true;
+          }
+        });
+      });
     } else {
       currentSearch = {};
     }
@@ -53,8 +61,10 @@ class App extends React.Component {
     currentCheckout[id] = key[id];
     currentCheckout[id]["purchase_quantity"] = 1;
     currentCheckout[id]["in_checkout"] = true;
+    // currentSearch[id]["in_checkout"] = true;
     this.setState({
       checkout: currentCheckout
+      // alcApiRes: currentSearch
     });
   };
 
@@ -63,7 +73,6 @@ class App extends React.Component {
     for (let i in obj) {
       if (obj[i]) {
         content = true;
-        // console.log(obj[i]);
       }
     }
     return content;
@@ -75,7 +84,22 @@ class App extends React.Component {
     this.setState({
       checkout: currentState
     });
-    console.log(this.state.checkout[key]);
+  };
+
+  removeFromCheckout = key => {
+    let checkoutCurrentState = { ...this.state.checkout };
+    let searchCurrentStateObj = this.state.alcApiRes;
+    let searchCurrentState = { ...searchCurrentStateObj };
+    delete checkoutCurrentState[key];
+    Object.keys(searchCurrentState).map(index => {
+      if (searchCurrentState[index].id == key) {
+        searchCurrentState[index]["in_checkout"] = false;
+      }
+    });
+    this.setState({
+      checkout: checkoutCurrentState,
+      alcApiRes: searchCurrentStateObj
+    });
   };
 
   render() {
@@ -94,6 +118,8 @@ class App extends React.Component {
           <DisplaySearchedAlc
             alcApiRes={this.state.alcApiRes}
             saveCheckout={this.saveCheckout}
+            checkout={this.state.checkout}
+            objectHasContent={this.objectHasContent}
           />
         ) : null}
         {this.state.suggestion.length ? (
@@ -108,6 +134,7 @@ class App extends React.Component {
           <CheckoutMenu
             checkout={this.state.checkout}
             changeQuantCheckout={this.changeQuantCheckout}
+            removeFromCheckout={this.removeFromCheckout}
           />
         ) : null}
       </div>
