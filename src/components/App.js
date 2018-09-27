@@ -31,7 +31,6 @@ class App extends React.Component {
         checkout: JSON.parse(localStorageRef)
       });
     }
-    console.log(this.state.checkout);
 
     //Firebase
     this.ref = base.syncState(`${params.houseId}/fridge`, {
@@ -136,12 +135,27 @@ class App extends React.Component {
   };
 
   saveToFridge = () => {
-    const checkout = { ...this.state.checkout };
-    let fridge = checkout;
-    this.setState({
-      fridge: fridge
+    let checkout = { ...this.state.checkout };
+    let alcApiRes = { ...this.state.alcApiRes };
+    let fridge = { ...this.state.fridge };
+    Object.keys(fridge).map(keys => {
+      const fridgeId = fridge[keys].id;
+      Object.keys(checkout).map(index => {
+        if (fridgeId == index) {
+          checkout[index].purchase_quantity += fridge[index].purchase_quantity;
+          console.log("worked");
+        }
+      });
     });
-    console.log(this.state.fridge);
+    fridge = checkout;
+    console.log(fridge);
+    checkout = {};
+    alcApiRes = {};
+    this.setState({
+      fridge,
+      checkout,
+      alcApiRes
+    });
   };
 
   render() {

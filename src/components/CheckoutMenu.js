@@ -1,5 +1,7 @@
 import React from "react";
 import CheckoutOneAlc from "./CheckoutOneAlc";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import BeerFridge from "./BeerFridge";
 
 class CheckoutMenu extends React.Component {
   handleClick = () => {
