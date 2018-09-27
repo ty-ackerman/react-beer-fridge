@@ -2,13 +2,14 @@ import React from "react";
 import SimpleSearch from "./SimpleSearch";
 import DisplaySearchedAlc from "./DisplaySearchedAlc";
 import DisplaySuggestion from "./DisplaySuggestion";
+import CheckoutMenu from "./CheckoutMenu";
 
 class App extends React.Component {
   state = {
     alcName: "",
     alcApiRes: {},
     suggestion: "",
-    saved: {}
+    checkout: {}
   };
 
   getAlcName = newAlc => {
@@ -47,10 +48,34 @@ class App extends React.Component {
     });
   };
 
-  saveAlc = (key, id) => {
-    let currentSaved = { ...this.state.saved };
-    currentSaved[key.id] = key[key.id];
-    console.log(currentSaved);
+  saveCheckout = (key, id) => {
+    let currentCheckout = { ...this.state.checkout };
+    currentCheckout[id] = key[id];
+    currentCheckout[id]["purchase_quantity"] = 1;
+    currentCheckout[id]["in_checkout"] = true;
+    this.setState({
+      checkout: currentCheckout
+    });
+  };
+
+  objectHasContent = obj => {
+    let content = false;
+    for (let i in obj) {
+      if (obj[i]) {
+        content = true;
+        // console.log(obj[i]);
+      }
+    }
+    return content;
+  };
+
+  changeQuantCheckout = (key, newAmount) => {
+    let currentState = { ...this.state.checkout };
+    currentState[key].purchase_quantity = newAmount;
+    this.setState({
+      checkout: currentState
+    });
+    console.log(this.state.checkout[key]);
   };
 
   render() {
@@ -68,7 +93,7 @@ class App extends React.Component {
         {this.state.alcApiRes.length ? (
           <DisplaySearchedAlc
             alcApiRes={this.state.alcApiRes}
-            saveAlc={this.saveAlc}
+            saveCheckout={this.saveCheckout}
           />
         ) : null}
         {this.state.suggestion.length ? (
@@ -77,6 +102,12 @@ class App extends React.Component {
             getAlcName={this.getAlcName}
             alcSearchRes={this.alcSearchRes}
             clearSuggestion={this.clearSuggestion}
+          />
+        ) : null}
+        {this.objectHasContent(this.state.checkout) ? (
+          <CheckoutMenu
+            checkout={this.state.checkout}
+            changeQuantCheckout={this.changeQuantCheckout}
           />
         ) : null}
       </div>

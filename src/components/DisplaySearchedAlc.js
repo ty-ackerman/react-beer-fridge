@@ -12,7 +12,11 @@ class DisplaySearchedAlc extends React.Component {
         <ul>
           {this.props.alcApiRes.map(key => {
             return (
-              <OneAlc key={key.id} index={key} saveAlc={this.props.saveAlc} />
+              <OneAlc
+                key={key.id}
+                index={key}
+                saveCheckout={this.props.saveCheckout}
+              />
             );
           })}
         </ul>
