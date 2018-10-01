@@ -15,9 +15,11 @@ class SimpleSearch extends React.Component {
       params: {
         access_key:
           "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
-        q: alcName
+        q: alcName,
+        page: this.props.currentPage
       }
     }).then(res => {
+      console.log(res.data.pager);
       if (res.data.result) {
         this.props.alcSearchRes(res.data.result, alcName);
       }
@@ -26,6 +28,7 @@ class SimpleSearch extends React.Component {
       } else {
         this.props.clearSuggestion();
       }
+      this.props.alcSearchData(res.data.pager);
     });
   };
 

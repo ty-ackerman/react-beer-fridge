@@ -1,5 +1,6 @@
 import React from "react";
 import OneAlc from "./OneAlc";
+import ScrollPage from "./ScrollPage";
 
 //This component will display the alcohol searched in SimpleSearch
 
@@ -7,6 +8,10 @@ class DisplaySearchedAlc extends React.Component {
   render() {
     return (
       <div>
+        <ScrollPage
+          searchData={this.props.searchData}
+          currentPage={this.props.currentPage}
+        />
         <h2>DisplaySearchedAlc</h2>
         <p>Displaying {this.props.alcApiRes.length} results: </p>
         <ul>
@@ -22,6 +27,10 @@ class DisplaySearchedAlc extends React.Component {
             );
           })}
         </ul>
+        <ScrollPage
+          searchData={this.props.searchData}
+          currentPage={this.props.currentPage}
+        />
       </div>
     );
   }

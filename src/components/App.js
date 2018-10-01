@@ -13,7 +13,9 @@ class App extends React.Component {
     alcApiRes: {},
     suggestion: "",
     checkout: {},
-    fridge: {}
+    fridge: {},
+    currentPage: 1,
+    searchData: {}
   };
 
   componentDidUpdate() {
@@ -78,6 +80,15 @@ class App extends React.Component {
     currentSuggestion = newSuggestion;
     this.setState({
       suggestion: currentSuggestion
+    });
+  };
+
+  alcSearchData = dataRes => {
+    console.log("ran");
+    let searchData = { ...this.state.searchData };
+    searchData = dataRes;
+    this.setState({
+      searchData
     });
   };
 
@@ -216,6 +227,8 @@ class App extends React.Component {
           alcApiRes={this.state.alcApiRes}
           alcSearchSuggestion={this.alcSearchSuggestion}
           clearSuggestion={this.clearSuggestion}
+          currentPage={this.state.currentPage}
+          alcSearchData={this.alcSearchData}
         />
         {this.state.alcApiRes.length ? (
           <DisplaySearchedAlc
@@ -223,6 +236,8 @@ class App extends React.Component {
             saveCheckout={this.saveCheckout}
             checkout={this.state.checkout}
             objectHasContent={this.objectHasContent}
+            searchData={this.state.searchData}
+            currentPage={this.state.currentPage}
           />
         ) : null}
         {this.state.suggestion.length ? (
