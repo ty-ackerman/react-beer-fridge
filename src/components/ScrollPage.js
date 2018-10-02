@@ -4,7 +4,6 @@ class ScrollPage extends React.Component {
   handleClick = e => {
     const instructions = e.target.textContent;
     this.props.pageChanger(instructions);
-    // this.props.apiChangePage();
   };
 
   render() {

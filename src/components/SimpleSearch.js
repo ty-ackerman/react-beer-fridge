@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 //This component will take the user's input in the search bar, and search the LCBO API
 

@@ -16,7 +16,8 @@ class App extends React.Component {
     checkout: {},
     fridge: {},
     currentPage: 1,
-    searchData: {}
+    searchData: {},
+    pageLoading: false
   };
 
   componentDidUpdate() {
@@ -86,6 +87,11 @@ class App extends React.Component {
 
   apiSearch = (e, alcInput) => {
     e.preventDefault();
+    let pageLoading = this.state.pageLoading;
+    pageLoading = true;
+    this.setState({
+      pageLoading
+    });
     const alcName = alcInput.value.value;
     this.getAlcName(alcName);
     axios({
@@ -106,11 +112,20 @@ class App extends React.Component {
         this.clearSuggestion();
       }
       this.alcSearchData(res.data.pager);
+      pageLoading = false;
+      this.setState({
+        pageLoading
+      });
     });
   };
 
   apiChangePage = () => {
     const { alcName, currentPage } = this.state;
+    let pageLoading = this.state.pageLoading;
+    pageLoading = true;
+    this.setState({
+      pageLoading
+    });
     axios({
       url: "https://lcboapi.com/products",
       params: {
@@ -122,6 +137,10 @@ class App extends React.Component {
     }).then(res => {
       this.alcSearchRes(res.data.result, alcName);
       this.alcSearchData(res.data.pager);
+      pageLoading = false;
+      this.setState({
+        pageLoading
+      });
     });
   };
 
@@ -296,6 +315,7 @@ class App extends React.Component {
             searchData={this.state.searchData}
             currentPage={this.state.currentPage}
             pageChanger={this.pageChanger}
+            pageLoading={this.state.pageLoading}
           />
         ) : null}
         {this.state.suggestion.length ? (

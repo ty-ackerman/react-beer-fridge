@@ -1,11 +1,18 @@
 import React from "react";
 import OneAlc from "./OneAlc";
 import ScrollPage from "./ScrollPage";
+import MDSpinner from "react-md-spinner";
 
 //This component will display the alcohol searched in SimpleSearch
 
 class DisplaySearchedAlc extends React.Component {
   render() {
+    if (this.props.pageLoading) {
+      return <MDSpinner className="spinner" size={100} />;
+    }
+    const pageStart = (this.props.currentPage - 1) * 20 + 1;
+    const pageEnd =
+      pageStart + this.props.searchData.current_page_record_count - 1;
     return (
       <div>
         <ScrollPage
@@ -14,7 +21,10 @@ class DisplaySearchedAlc extends React.Component {
           pageChanger={this.props.pageChanger}
         />
         <h2>DisplaySearchedAlc</h2>
-        <p>Displaying {this.props.alcApiRes.length} results: </p>
+        <p>
+          Displaying results {pageStart} - {pageEnd} of{" "}
+          {this.props.searchData.total_record_count} total:
+        </p>
         <ul>
           {this.props.alcApiRes.map(key => {
             return (
