@@ -23,13 +23,13 @@ class BeerFridgeOneAlc extends React.Component {
 
   render() {
     const {
-      alcohol_content,
+      // alcohol_content,
       image_thumb_url,
       name,
       package_unit_type,
-      purchase_quantity,
-      total_package_units,
-      varietal,
+      // purchase_quantity,
+      // total_package_units,
+      // varietal,
       purchase_remaining,
       in_checkout
     } = this.props.fridge[this.props.index];

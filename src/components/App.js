@@ -5,7 +5,7 @@ import DisplaySearchedAlc from "./DisplaySearchedAlc";
 import DisplaySuggestion from "./DisplaySuggestion";
 import CheckoutMenu from "./CheckoutMenu";
 import BeerFridge from "./BeerFridge";
-import base, { firebaseApp } from "../base";
+import base from "../base";
 import firebase from "firebase";
 import MoreInfo from "./MoreInfo";
 
@@ -67,10 +67,12 @@ class App extends React.Component {
       currentSearch.map(key => {
         key["in_checkout"] = false;
         Object.keys(this.state.checkout).map(checkoutKey => {
-          if (checkoutKey == key.id) {
+          if (parseInt(checkoutKey, 0) === key.id) {
             key["in_checkout"] = true;
           }
+          return null;
         });
+        return null;
       });
     } else {
       currentSearch = {};
@@ -180,9 +182,10 @@ class App extends React.Component {
       currentCheckout[id].package_unit_type = "box";
     }
     Object.keys(fridge).map(index => {
-      if (fridge[index].id == currentCheckout[id].id) {
+      if (fridge[index].id === parseInt(currentCheckout[id].id, 0)) {
         fridge[index].in_checkout = true;
       }
+      return null;
     });
     this.setState({
       checkout: currentCheckout,
@@ -217,18 +220,22 @@ class App extends React.Component {
     let fridge = { ...this.state.fridge };
     delete checkoutCurrentState[key];
     Object.keys(searchCurrentState).map(index => {
-      if (searchCurrentState[index].id == key) {
+      if (searchCurrentState[index].id === parseInt(key, 0)) {
         searchCurrentState[index]["in_checkout"] = false;
       }
+      return null;
     });
     Object.keys(fridge).map(id => {
-      if (fridge[id].id == key) {
+      if (fridge[id].id === parseInt(key, 0)) {
         fridge[id].in_checkout = false;
+        console.log(fridge[id].in_checkout);
       }
+      return null;
     });
     this.setState({
       checkout: checkoutCurrentState,
-      alcApiRes: searchCurrentStateObj
+      alcApiRes: searchCurrentStateObj,
+      fridge
     });
   };
 
@@ -240,17 +247,21 @@ class App extends React.Component {
       checkout[key].in_checkout = false;
       checkout[key]["purchase_remaining"] =
         checkout[key]["purchase_quantity"] * checkout[key].total_package_units;
+      return null;
     });
     Object.keys(fridge).map(keys => {
       const fridgeId = fridge[keys].id;
       Object.keys(checkout).map(index => {
-        if (fridgeId == index) {
+        console.log(typeof index);
+        if (fridgeId === parseInt(index, 0)) {
           checkout[index].purchase_quantity += fridge[index].purchase_quantity;
           checkout[index].purchase_remaining +=
             fridge[index].purchase_remaining;
           // checkout[index].in_checkout = false;
         }
+        return null;
       });
+      return null;
     });
     fridge = checkout;
     checkout = {};

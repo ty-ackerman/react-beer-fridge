@@ -14,7 +14,7 @@ class OneAlc extends React.Component {
       name,
       origin,
       price_in_cents,
-      id,
+      // id,
       in_checkout,
       image_thumb_url
     } = this.props.index;
