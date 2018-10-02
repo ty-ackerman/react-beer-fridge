@@ -17,6 +17,10 @@ class BeerFridgeOneAlc extends React.Component {
     this.props.saveCheckout(newSave, id);
   };
 
+  handleMoreInfo = () => {
+    this.props.changeShowMoreInfoState(this.props.index);
+  };
+
   render() {
     const {
       alcohol_content,
@@ -59,7 +63,7 @@ class BeerFridgeOneAlc extends React.Component {
         ) : (
           <p>In Checkout!!</p>
         )}
-        <button>More Info</button>
+        <button onClick={this.handleMoreInfo}>More Info</button>
       </div>
     );
   }

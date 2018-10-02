@@ -7,6 +7,7 @@ import CheckoutMenu from "./CheckoutMenu";
 import BeerFridge from "./BeerFridge";
 import base, { firebaseApp } from "../base";
 import firebase from "firebase";
+import MoreInfo from "./MoreInfo";
 
 class App extends React.Component {
   state = {
@@ -17,7 +18,9 @@ class App extends React.Component {
     fridge: {},
     currentPage: 1,
     searchData: {},
-    pageLoading: false
+    pageLoading: false,
+    showMoreInfo: false,
+    showMoreInfoId: ""
   };
 
   componentDidUpdate() {
@@ -88,35 +91,42 @@ class App extends React.Component {
   apiSearch = (e, alcInput) => {
     e.preventDefault();
     let pageLoading = this.state.pageLoading;
+    let currentPage = this.state.currentPage;
+    currentPage = 1;
     pageLoading = true;
-    this.setState({
-      pageLoading
-    });
-    const alcName = alcInput.value.value;
-    this.getAlcName(alcName);
-    axios({
-      url: "https://lcboapi.com/products",
-      params: {
-        access_key:
-          "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
-        q: alcName,
-        page: this.state.currentPage
+    this.setState(
+      {
+        pageLoading,
+        currentPage
+      },
+      () => {
+        const alcName = alcInput.value.value;
+        this.getAlcName(alcName);
+        axios({
+          url: "https://lcboapi.com/products",
+          params: {
+            access_key:
+              "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
+            q: alcName,
+            page: this.state.currentPage
+          }
+        }).then(res => {
+          if (res.data.result) {
+            this.alcSearchRes(res.data.result, alcName);
+          }
+          if (res.data.suggestion) {
+            this.alcSearchSuggestion(res.data.suggestion);
+          } else {
+            this.clearSuggestion();
+          }
+          this.alcSearchData(res.data.pager);
+          pageLoading = false;
+          this.setState({
+            pageLoading
+          });
+        });
       }
-    }).then(res => {
-      if (res.data.result) {
-        this.alcSearchRes(res.data.result, alcName);
-      }
-      if (res.data.suggestion) {
-        this.alcSearchSuggestion(res.data.suggestion);
-      } else {
-        this.clearSuggestion();
-      }
-      this.alcSearchData(res.data.pager);
-      pageLoading = false;
-      this.setState({
-        pageLoading
-      });
-    });
+    );
   };
 
   apiChangePage = () => {
@@ -284,16 +294,40 @@ class App extends React.Component {
     );
   };
 
+  changeShowMoreInfoState = id => {
+    let showMoreInfo = this.state.showMoreInfo;
+    let showMoreInfoId = this.state.showMoreInfoId;
+    if (showMoreInfo) {
+      showMoreInfo = false;
+      showMoreInfoId = "";
+    } else {
+      showMoreInfo = true;
+      showMoreInfoId = id;
+    }
+    this.setState({
+      showMoreInfo,
+      showMoreInfoId
+    });
+  };
+
   render() {
     return (
       <div>
         <h1>Beer Fridge</h1>
+        {this.state.showMoreInfo ? (
+          <MoreInfo
+            showMoreInfoId={this.state.showMoreInfoId}
+            fridge={this.state.fridge}
+          />
+        ) : null}
         {this.objectHasContent(this.state.fridge) ? (
           <BeerFridge
             fridge={this.state.fridge}
             drinkFridge={this.drinkFridge}
             removeFromFridge={this.removeFromFridge}
             saveCheckout={this.saveCheckout}
+            showMoreInfo={this.state.showMoreInfo}
+            changeShowMoreInfoState={this.changeShowMoreInfoState}
           />
         ) : null}
         <SimpleSearch

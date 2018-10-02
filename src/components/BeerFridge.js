@@ -2,6 +2,10 @@ import React from "react";
 import BeerFridgeOneAlc from "./BeerFridgeOneAlc";
 
 class BeerFridge extends React.Component {
+  componentDidMount() {
+    console.log("mounted");
+  }
+
   render() {
     return (
       <div>
@@ -15,6 +19,8 @@ class BeerFridge extends React.Component {
               drinkFridge={this.props.drinkFridge}
               removeFromFridge={this.props.removeFromFridge}
               saveCheckout={this.props.saveCheckout}
+              showMoreInfo={this.props.showMoreInfo}
+              changeShowMoreInfoState={this.props.changeShowMoreInfoState}
             />
           );
         })}
