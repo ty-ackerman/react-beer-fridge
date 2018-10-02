@@ -11,6 +11,7 @@ class DisplaySearchedAlc extends React.Component {
         <ScrollPage
           searchData={this.props.searchData}
           currentPage={this.props.currentPage}
+          pageChanger={this.props.pageChanger}
         />
         <h2>DisplaySearchedAlc</h2>
         <p>Displaying {this.props.alcApiRes.length} results: </p>
@@ -30,6 +31,7 @@ class DisplaySearchedAlc extends React.Component {
         <ScrollPage
           searchData={this.props.searchData}
           currentPage={this.props.currentPage}
+          pageChanger={this.props.pageChanger}
         />
       </div>
     );

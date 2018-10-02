@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import SimpleSearch from "./SimpleSearch";
 import DisplaySearchedAlc from "./DisplaySearchedAlc";
 import DisplaySuggestion from "./DisplaySuggestion";
@@ -83,8 +84,48 @@ class App extends React.Component {
     });
   };
 
+  apiSearch = (e, alcInput) => {
+    e.preventDefault();
+    const alcName = alcInput.value.value;
+    this.getAlcName(alcName);
+    axios({
+      url: "https://lcboapi.com/products",
+      params: {
+        access_key:
+          "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
+        q: alcName,
+        page: this.state.currentPage
+      }
+    }).then(res => {
+      if (res.data.result) {
+        this.alcSearchRes(res.data.result, alcName);
+      }
+      if (res.data.suggestion) {
+        this.alcSearchSuggestion(res.data.suggestion);
+      } else {
+        this.clearSuggestion();
+      }
+      this.alcSearchData(res.data.pager);
+    });
+  };
+
+  apiChangePage = () => {
+    const { alcName, currentPage } = this.state;
+    axios({
+      url: "https://lcboapi.com/products",
+      params: {
+        access_key:
+          "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
+        q: alcName,
+        page: currentPage
+      }
+    }).then(res => {
+      this.alcSearchRes(res.data.result, alcName);
+      this.alcSearchData(res.data.pager);
+    });
+  };
+
   alcSearchData = dataRes => {
-    console.log("ran");
     let searchData = { ...this.state.searchData };
     searchData = dataRes;
     this.setState({
@@ -209,6 +250,21 @@ class App extends React.Component {
       .remove();
   };
 
+  pageChanger = instructions => {
+    let currentPage = this.state.currentPage;
+    if (instructions === "Next") {
+      currentPage = currentPage + 1;
+    } else {
+      currentPage = currentPage - 1;
+    }
+    this.setState(
+      {
+        currentPage
+      },
+      () => this.apiChangePage()
+    );
+  };
+
   render() {
     return (
       <div>
@@ -229,6 +285,7 @@ class App extends React.Component {
           clearSuggestion={this.clearSuggestion}
           currentPage={this.state.currentPage}
           alcSearchData={this.alcSearchData}
+          apiSearch={this.apiSearch}
         />
         {this.state.alcApiRes.length ? (
           <DisplaySearchedAlc
@@ -238,6 +295,7 @@ class App extends React.Component {
             objectHasContent={this.objectHasContent}
             searchData={this.state.searchData}
             currentPage={this.state.currentPage}
+            pageChanger={this.pageChanger}
           />
         ) : null}
         {this.state.suggestion.length ? (
