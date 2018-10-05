@@ -6,7 +6,6 @@ import DisplaySuggestion from "./DisplaySuggestion";
 import CheckoutMenu from "./CheckoutMenu";
 import BeerFridge from "./BeerFridge";
 import base from "../base";
-import firebase from "firebase";
 import MoreInfo from "./MoreInfo";
 
 class App extends React.Component {
@@ -283,11 +282,17 @@ class App extends React.Component {
   };
 
   removeFromFridge = key => {
-    const { params } = this.props.match;
-    firebase
-      .database()
-      .ref(`${params.houseId}/fridge/${key}`)
-      .remove();
+    // const { params } = this.props.match;
+    // firebase
+    //   .database()
+    //   .ref(`${params.houseId}/fridge/${key}`)
+    //   .remove();
+
+    const fridge = { ...this.state.fridge };
+    fridge[key] = null;
+    this.setState({
+      fridge
+    });
   };
 
   pageChanger = instructions => {

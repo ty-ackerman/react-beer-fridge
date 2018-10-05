@@ -36,7 +36,7 @@ class BeerFridgeOneAlc extends React.Component {
     return (
       <div>
         <h2>{name}</h2>
-        <button onClick={this.handleRemove}>X</button>
+        <button onClick={this.handleRemove}>&times;</button>
         <p>{purchase_remaining}</p>
         <img src={image_thumb_url} alt={name} />
         {purchase_remaining !== 1 ? (
