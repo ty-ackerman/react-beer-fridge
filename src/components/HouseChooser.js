@@ -17,8 +17,9 @@ class HouseChooser extends React.Component {
     e.preventDefault();
     //   const houseName = this.userInput.current.value
     const houseName = this.userInput.value.value;
+    console.log(houseName);
     base.post(`${houseName}/owner`, {
-      data: this.state.uid.uid
+      data: this.state.uid
     });
     //Change the page to house/whatever-they-entered
     this.props.history.push({
@@ -68,10 +69,11 @@ class HouseChooser extends React.Component {
       this.setState(
         {
           uid
-        },
-        () => this.findHousesOwned()
+        }
+        // () => this.findHousesOwned()
       );
     }
+    this.findHousesOwned();
   }
 
   logMeOut = async () => {
