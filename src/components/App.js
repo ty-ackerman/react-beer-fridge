@@ -7,6 +7,8 @@ import CheckoutMenu from "./CheckoutMenu";
 import BeerFridge from "./BeerFridge";
 import base from "../base";
 import MoreInfo from "./MoreInfo";
+import Logout from "./Logout";
+import firebase from "firebase";
 
 class App extends React.Component {
   state = {
@@ -326,9 +328,21 @@ class App extends React.Component {
     });
   };
 
+  logMeOut = async () => {
+    await firebase.auth().signOut();
+    this.setState({
+      uid: null
+    });
+    this.props.history.push({
+      pathname: `/`,
+      state: { uid: null }
+    });
+  };
+
   render() {
     return (
       <div>
+        <Logout logMeOut={this.logMeOut} />
         <h1>Beer Fridge</h1>
         {this.state.showMoreInfo ? (
           <MoreInfo
