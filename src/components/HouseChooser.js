@@ -17,7 +17,7 @@ class HouseChooser extends React.Component {
     e.preventDefault();
     //   const houseName = this.userInput.current.value
     const houseName = this.userInput.value.value;
-    console.log(houseName);
+    // console.log(houseName);
     base.post(`${houseName}/owner`, {
       data: this.state.uid
     });
@@ -39,9 +39,9 @@ class HouseChooser extends React.Component {
       let house = data.val();
       if (house) {
         Object.keys(house).map(index => {
-          console.log(this.state.uid);
+          //   console.log(this.state.uid);
           if (house[index].owner === this.state.uid) {
-            console.log(house[index]);
+            // console.log(house[index]);
           }
         });
       }
@@ -63,17 +63,17 @@ class HouseChooser extends React.Component {
 
   componentDidMount() {
     // this.authHandler();
-    const uid = this.props.history.location.state.uid;
-    console.log(uid);
+    const { uid, user } = this.props.history.location.state;
+    // console.log(uid);
     if (uid) {
       this.setState(
         {
-          uid
-        }
-        // () => this.findHousesOwned()
+          uid,
+          user
+        },
+        () => this.findHousesOwned()
       );
     }
-    this.findHousesOwned();
   }
 
   logMeOut = async () => {
@@ -92,7 +92,11 @@ class HouseChooser extends React.Component {
       <React.Fragment>
         <Logout logMeOut={this.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
-          <h2>Please Enter A House Name</h2>
+          <h2>
+            {this.state.user
+              ? this.state.user.displayName
+              : "Please Enter a House Name"}
+          </h2>
           <input
             type="text"
             required

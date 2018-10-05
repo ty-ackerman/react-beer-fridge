@@ -5,7 +5,8 @@ import base, { firebaseApp } from "../base";
 
 class Login extends React.Component {
   state = {
-    uid: null
+    uid: null,
+    user: null
   };
 
   openHouse = () => {
@@ -16,14 +17,19 @@ class Login extends React.Component {
     //Change the page to house/whatever-they-entered
     this.props.history.push({
       pathname: `/house/`,
-      state: { uid: this.state.uid }
+      state: {
+        uid: this.state.uid,
+        user: JSON.parse(JSON.stringify(this.state.user))
+      }
       //the state will be passed through this.props.history.location.state
     });
   };
 
   authHandler = async authData => {
+    console.log(authData.user);
     this.setState({
-      uid: authData.user.uid
+      uid: authData.user.uid,
+      user: authData.user
     });
     // const house = await base.fetch(this.props.houseId, { context: this });
     this.openHouse();
