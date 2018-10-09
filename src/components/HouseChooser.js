@@ -13,6 +13,8 @@ class HouseChooser extends React.Component {
     //   const houseName = this.userInput.current.value
     const houseName = this.userInput.value.value;
     this.props.getHouseId(houseName);
+    this.props.addOwnerToHouse(houseName);
+
     // console.log(houseName);
     // base.post(`${houseName}/owner`, {
     //   data: this.state.uid
@@ -44,8 +46,9 @@ class HouseChooser extends React.Component {
   //   };
 
   componentDidMount() {
+    this.props.findHousesOwned();
+
     // this.authHandler();
-    () => this.props.findHousesOwned();
   }
 
   // logMeOut = async () => {

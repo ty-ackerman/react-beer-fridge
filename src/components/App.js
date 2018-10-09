@@ -50,10 +50,11 @@ class App extends React.Component {
     //Firebase
     const houseId = this.state.houseId;
     console.log(this.state.houseId);
-    this.ref = base.syncState(`${houseId}/fridge/`, {
-      context: this,
-      state: "fridge"
-    });
+    () =>
+      (this.ref = base.syncState(`${houseId}/fridge/`, {
+        context: this,
+        state: "fridge"
+      }));
 
     //Check to see if user is still logged in
     firebase.auth().onAuthStateChanged(user => {
@@ -370,7 +371,8 @@ class App extends React.Component {
       searchData: {},
       showMoreInfo: false,
       currentPage: 1,
-      suggestion: ""
+      suggestion: "",
+      checkout: {}
     });
   };
 
@@ -397,9 +399,25 @@ class App extends React.Component {
       let house = data.val();
       if (house) {
         Object.keys(house).map(index => {
-          //   console.log(this.state.uid);
           if (house[index].owner === this.state.uid) {
-            console.log(house[index]);
+            console.log(index);
+          }
+        });
+      }
+    });
+  };
+
+  addOwnerToHouse = houseName => {
+    //I need to add something here that checks to see if the house already exists
+    const dbRef = firebase.database().ref();
+    dbRef.on("value", data => {
+      let house = data.val();
+      if (house) {
+        Object.keys(house).map(index => {
+          if (!house[index].owner) {
+            base.post(`${houseName}/owner`, {
+              data: this.state.uid
+            });
           }
         });
       }
@@ -417,6 +435,7 @@ class App extends React.Component {
             findHousesOwned={this.findHousesOwned}
             user={this.state.user}
             logMeOut={this.logMeOut}
+            addOwnerToHouse={this.addOwnerToHouse}
           />
         );
       } else {
