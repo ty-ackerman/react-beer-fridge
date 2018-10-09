@@ -1,8 +1,10 @@
 import React from "react";
 import { getFunName } from "../helpers";
-import firebase from "firebase";
-import base, { firebaseApp } from "../base";
+// import firebase from "firebase";
+// import base, { firebaseApp } from "../base";
 import Logout from "./Logout";
+import MDSpinner from "react-md-spinner";
+import OneHouseChooser from "./OneHouseChooser";
 
 //This component will be the second page after the user logs in
 class HouseChooser extends React.Component {
@@ -63,6 +65,31 @@ class HouseChooser extends React.Component {
   // };
 
   render() {
+    const houseNames = this.props.ownedByUser;
+    if (this.props.pageLoading) {
+      return (
+        <React.Fragment>
+          <Logout logMeOut={this.props.logMeOut} />
+          <form action="" className="house-selector" onSubmit={this.openFridge}>
+            <h2>
+              {this.props.user
+                ? this.props.user.displayName
+                : "Please Enter a House Name"}
+            </h2>
+            <input
+              type="text"
+              required
+              ref={this.userInput}
+              placeholder="House Name"
+              defaultValue={getFunName()}
+            />
+            <button type="submit">Open Fridge</button>
+          </form>
+          <MDSpinner className="spinner" size={100} />
+        </React.Fragment>
+      );
+    }
+
     return (
       <React.Fragment>
         <Logout logMeOut={this.props.logMeOut} />
@@ -81,6 +108,10 @@ class HouseChooser extends React.Component {
           />
           <button type="submit">Open Fridge</button>
         </form>
+
+        {houseNames.map(house => {
+          return <OneHouseChooser oneHouse={house} key={Object.keys(house)} />;
+        })}
       </React.Fragment>
     );
   }

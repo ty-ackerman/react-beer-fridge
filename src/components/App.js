@@ -50,11 +50,12 @@ class App extends React.Component {
     //Firebase
     const houseId = this.state.houseId;
     // console.log(this.state.houseId);
-    () =>
-      (this.ref = base.syncState(`${houseId}/fridge/`, {
+    () => {
+      this.ref = base.syncState(`${houseId}/fridge/`, {
         context: this,
         state: "fridge"
-      }));
+      });
+    };
 
     //Check to see if user is still logged in
     firebase.auth().onAuthStateChanged(user => {
@@ -396,23 +397,26 @@ class App extends React.Component {
   findHousesOwned = () => {
     const dbRef = firebase.database().ref();
     let ownedByUser = this.state.ownedByUser;
+    let pageLoading = true;
+    this.setState({
+      pageLoading
+    });
     dbRef.on("value", data => {
       let house = data.val();
       if (house) {
         Object.keys(house).map(index => {
           if (house[index].owner === this.state.uid) {
-            ownedByUser.push(house[index]);
+            ownedByUser.push({
+              [index]: house[index]
+            });
           }
+          return null;
         });
       }
-      this.setState(
-        {
-          ownedByUser
-        },
-        () => {
-          console.log(this.state.ownedByUser);
-        }
-      );
+      this.setState({
+        ownedByUser,
+        pageLoading: false
+      });
     });
   };
 
@@ -428,87 +432,88 @@ class App extends React.Component {
               data: this.state.uid
             });
           }
+          return null;
         });
       }
     });
   };
 
   render() {
-    {
-      if (!this.state.uid) {
-        return <Login authenticate={this.authenticate} />;
-      } else if (this.state.uid && !this.state.houseId) {
-        return (
-          <HouseChooser
-            getHouseId={this.getHouseId}
-            findHousesOwned={this.findHousesOwned}
-            user={this.state.user}
-            logMeOut={this.logMeOut}
-            addOwnerToHouse={this.addOwnerToHouse}
+    if (!this.state.uid) {
+      return <Login authenticate={this.authenticate} />;
+    } else if (this.state.uid && !this.state.houseId) {
+      return (
+        <HouseChooser
+          getHouseId={this.getHouseId}
+          findHousesOwned={this.findHousesOwned}
+          user={this.state.user}
+          logMeOut={this.logMeOut}
+          addOwnerToHouse={this.addOwnerToHouse}
+          pageLoading={this.state.pageLoading}
+          ownedByUser={this.state.ownedByUser}
+        />
+      );
+    } else {
+      return (
+        <div>
+          <Logout logMeOut={this.logMeOut} />
+          <h1>Beer Fridge</h1>
+          {this.state.showMoreInfo ? (
+            <MoreInfo
+              showMoreInfoId={this.state.showMoreInfoId}
+              fridge={this.state.fridge}
+            />
+          ) : null}
+          {this.objectHasContent(this.state.fridge) ? (
+            <BeerFridge
+              fridge={this.state.fridge}
+              drinkFridge={this.drinkFridge}
+              removeFromFridge={this.removeFromFridge}
+              saveCheckout={this.saveCheckout}
+              showMoreInfo={this.state.showMoreInfo}
+              changeShowMoreInfoState={this.changeShowMoreInfoState}
+            />
+          ) : null}
+          <SimpleSearch
+            getAlcName={this.getAlcName}
+            alcSearchRes={this.alcSearchRes}
+            alcApiRes={this.state.alcApiRes}
+            alcSearchSuggestion={this.alcSearchSuggestion}
+            clearSuggestion={this.clearSuggestion}
+            currentPage={this.state.currentPage}
+            alcSearchData={this.alcSearchData}
+            apiSearch={this.apiSearch}
           />
-        );
-      } else {
-        return (
-          <div>
-            <Logout logMeOut={this.logMeOut} />
-            <h1>Beer Fridge</h1>
-            {this.state.showMoreInfo ? (
-              <MoreInfo
-                showMoreInfoId={this.state.showMoreInfoId}
-                fridge={this.state.fridge}
-              />
-            ) : null}
-            {this.objectHasContent(this.state.fridge) ? (
-              <BeerFridge
-                fridge={this.state.fridge}
-                drinkFridge={this.drinkFridge}
-                removeFromFridge={this.removeFromFridge}
-                saveCheckout={this.saveCheckout}
-                showMoreInfo={this.state.showMoreInfo}
-                changeShowMoreInfoState={this.changeShowMoreInfoState}
-              />
-            ) : null}
-            <SimpleSearch
+          {this.state.alcApiRes.length ? (
+            <DisplaySearchedAlc
+              alcApiRes={this.state.alcApiRes}
+              saveCheckout={this.saveCheckout}
+              checkout={this.state.checkout}
+              objectHasContent={this.objectHasContent}
+              searchData={this.state.searchData}
+              currentPage={this.state.currentPage}
+              pageChanger={this.pageChanger}
+              pageLoading={this.state.pageLoading}
+            />
+          ) : null}
+          {this.state.suggestion.length ? (
+            <DisplaySuggestion
+              suggestion={this.state.suggestion}
               getAlcName={this.getAlcName}
               alcSearchRes={this.alcSearchRes}
-              alcApiRes={this.state.alcApiRes}
-              alcSearchSuggestion={this.alcSearchSuggestion}
               clearSuggestion={this.clearSuggestion}
-              currentPage={this.state.currentPage}
-              alcSearchData={this.alcSearchData}
-              apiSearch={this.apiSearch}
             />
-            {this.state.alcApiRes.length ? (
-              <DisplaySearchedAlc
-                alcApiRes={this.state.alcApiRes}
-                saveCheckout={this.saveCheckout}
-                checkout={this.state.checkout}
-                objectHasContent={this.objectHasContent}
-                searchData={this.state.searchData}
-                currentPage={this.state.currentPage}
-                pageChanger={this.pageChanger}
-                pageLoading={this.state.pageLoading}
-              />
-            ) : null}
-            {this.state.suggestion.length ? (
-              <DisplaySuggestion
-                suggestion={this.state.suggestion}
-                getAlcName={this.getAlcName}
-                alcSearchRes={this.alcSearchRes}
-                clearSuggestion={this.clearSuggestion}
-              />
-            ) : null}
-            {this.objectHasContent(this.state.checkout) ? (
-              <CheckoutMenu
-                checkout={this.state.checkout}
-                changeQuantCheckout={this.changeQuantCheckout}
-                removeFromCheckout={this.removeFromCheckout}
-                saveToFridge={this.saveToFridge}
-              />
-            ) : null}
-          </div>
-        );
-      }
+          ) : null}
+          {this.objectHasContent(this.state.checkout) ? (
+            <CheckoutMenu
+              checkout={this.state.checkout}
+              changeQuantCheckout={this.changeQuantCheckout}
+              removeFromCheckout={this.removeFromCheckout}
+              saveToFridge={this.saveToFridge}
+            />
+          ) : null}
+        </div>
+      );
     }
   }
 }
