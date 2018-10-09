@@ -2,10 +2,6 @@ import React from "react";
 import BeerFridgeOneAlc from "./BeerFridgeOneAlc";
 
 class BeerFridge extends React.Component {
-  componentDidMount() {
-    console.log("mounted");
-  }
-
   render() {
     return (
       <div>

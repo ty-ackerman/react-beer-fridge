@@ -6,26 +6,22 @@ import Logout from "./Logout";
 
 //This component will be the second page after the user logs in
 class HouseChooser extends React.Component {
-  state = {
-    uid: null,
-    ownedByUser: []
-  };
-
   userInput = React.createRef();
 
   openFridge = e => {
     e.preventDefault();
     //   const houseName = this.userInput.current.value
     const houseName = this.userInput.value.value;
+    this.props.getHouseId(houseName);
     // console.log(houseName);
-    base.post(`${houseName}/owner`, {
-      data: this.state.uid
-    });
+    // base.post(`${houseName}/owner`, {
+    //   data: this.state.uid
+    // });
     //Change the page to house/whatever-they-entered
-    this.props.history.push({
-      pathname: `/house/${houseName}`,
-      state: { message: "hello" }
-    });
+    // this.props.history.push({
+    //   pathname: `/house/${houseName}`,
+    //   state: { message: "hello" }
+    // });
   };
 
   //     console.log(authData.user.uid);
@@ -33,20 +29,6 @@ class HouseChooser extends React.Component {
   // console.log(house);
   //THE CODE BELOW WILL BE REALLY IMPORTANT FOR THE BEER-FRIDGE APP
 
-  findHousesOwned = () => {
-    const dbRef = firebase.database().ref();
-    dbRef.on("value", data => {
-      let house = data.val();
-      if (house) {
-        Object.keys(house).map(index => {
-          //   console.log(this.state.uid);
-          if (house[index].owner === this.state.uid) {
-            // console.log(house[index]);
-          }
-        });
-      }
-    });
-  };
   // console.log(dbRef);
   // console.log(Object.keys(data.val()));
   // if (!house.owner) {
@@ -63,38 +45,28 @@ class HouseChooser extends React.Component {
 
   componentDidMount() {
     // this.authHandler();
-    const { uid, user } = this.props.history.location.state;
-    // console.log(uid);
-    if (uid) {
-      this.setState(
-        {
-          uid,
-          user
-        },
-        () => this.findHousesOwned()
-      );
-    }
+    () => this.props.findHousesOwned();
   }
 
-  logMeOut = async () => {
-    await firebase.auth().signOut();
-    this.setState({
-      uid: null
-    });
-    this.props.history.push({
-      pathname: `/`,
-      state: { uid: null }
-    });
-  };
+  // logMeOut = async () => {
+  //   await firebase.auth().signOut();
+  //   this.setState({
+  //     uid: null
+  //   });
+  //   this.props.history.push({
+  //     pathname: `/`,
+  //     state: { uid: null }
+  //   });
+  // };
 
   render() {
     return (
       <React.Fragment>
-        <Logout logMeOut={this.logMeOut} />
+        <Logout logMeOut={this.props.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
           <h2>
-            {this.state.user
-              ? this.state.user.displayName
+            {this.props.user
+              ? this.props.user.displayName
               : "Please Enter a House Name"}
           </h2>
           <input

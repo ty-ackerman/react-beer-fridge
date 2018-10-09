@@ -5,13 +5,16 @@ import DisplaySearchedAlc from "./DisplaySearchedAlc";
 import DisplaySuggestion from "./DisplaySuggestion";
 import CheckoutMenu from "./CheckoutMenu";
 import BeerFridge from "./BeerFridge";
-import base from "../base";
+import base, { firebaseApp } from "../base";
 import MoreInfo from "./MoreInfo";
 import Logout from "./Logout";
 import firebase from "firebase";
+import Login from "./Login";
+import HouseChooser from "./HouseChooser";
 
 class App extends React.Component {
   state = {
+    houseId: "",
     alcName: "",
     alcApiRes: {},
     suggestion: "",
@@ -21,20 +24,23 @@ class App extends React.Component {
     searchData: {},
     pageLoading: false,
     showMoreInfo: false,
-    showMoreInfoId: ""
+    showMoreInfoId: "",
+    uid: null,
+    user: null,
+    ownedByUser: []
   };
 
   componentDidUpdate() {
     localStorage.setItem(
-      this.props.match.params.houseId,
+      this.state.houseId,
       JSON.stringify(this.state.checkout)
     );
   }
 
   componentDidMount() {
     //Local Storage
-    const { params } = this.props.match;
-    const localStorageRef = localStorage.getItem(params.houseId);
+    // const { params } = this.props.match;
+    const localStorageRef = localStorage.getItem(this.state.houseId);
     if (localStorageRef) {
       this.setState({
         checkout: JSON.parse(localStorageRef)
@@ -42,11 +48,37 @@ class App extends React.Component {
     }
 
     //Firebase
-    this.ref = base.syncState(`${params.houseId}/fridge`, {
+    const houseId = this.state.houseId;
+    console.log(this.state.houseId);
+    this.ref = base.syncState(`${houseId}/fridge/`, {
       context: this,
       state: "fridge"
     });
+
+    //Check to see if user is still logged in
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
   }
+
+  getHouseId = newId => {
+    let houseId = this.state.houseId;
+    houseId = newId;
+    this.setState(
+      {
+        houseId
+      },
+      () => {
+        console.log(this.state.houseId);
+        this.ref = base.syncState(`${houseId}/fridge/`, {
+          context: this,
+          state: "fridge"
+        });
+      }
+    );
+  };
 
   componentWillUnmount() {
     //Prevent firebase memory leak
@@ -268,8 +300,8 @@ class App extends React.Component {
     checkout = {};
     alcApiRes = {};
     this.setState({
-      fridge,
       checkout,
+      fridge,
       alcApiRes
     });
   };
@@ -284,11 +316,10 @@ class App extends React.Component {
   };
 
   removeFromFridge = key => {
-    // const { params } = this.props.match;
-    // firebase
-    //   .database()
-    //   .ref(`${params.houseId}/fridge/${key}`)
-    //   .remove();
+    firebase
+      .database()
+      .ref(`${this.state.houseId}/fridge/${key}`)
+      .remove();
 
     const fridge = { ...this.state.fridge };
     fridge[key] = null;
@@ -331,75 +362,126 @@ class App extends React.Component {
   logMeOut = async () => {
     await firebase.auth().signOut();
     this.setState({
-      uid: null
+      uid: null,
+      user: null,
+      ownedByUser: null,
+      houseId: null,
+      alcApiRes: {},
+      searchData: {},
+      showMoreInfo: false,
+      currentPage: 1,
+      suggestion: ""
     });
-    this.props.history.push({
-      pathname: `/`,
-      state: { uid: null }
+  };
+
+  authHandler = async authData => {
+    console.log(authData.user);
+    this.setState({
+      uid: authData.user.uid,
+      user: authData.user
+    });
+  };
+
+  authenticate = provider => {
+    console.log("worked");
+    const authProvider = new firebase.auth[`${provider}AuthProvider`]();
+    firebaseApp
+      .auth()
+      .signInWithPopup(authProvider)
+      .then(this.authHandler);
+  };
+
+  findHousesOwned = () => {
+    const dbRef = firebase.database().ref();
+    dbRef.on("value", data => {
+      let house = data.val();
+      if (house) {
+        Object.keys(house).map(index => {
+          //   console.log(this.state.uid);
+          if (house[index].owner === this.state.uid) {
+            console.log(house[index]);
+          }
+        });
+      }
     });
   };
 
   render() {
-    return (
-      <div>
-        <Logout logMeOut={this.logMeOut} />
-        <h1>Beer Fridge</h1>
-        {this.state.showMoreInfo ? (
-          <MoreInfo
-            showMoreInfoId={this.state.showMoreInfoId}
-            fridge={this.state.fridge}
+    {
+      if (!this.state.uid) {
+        return <Login authenticate={this.authenticate} />;
+      } else if (this.state.uid && !this.state.houseId) {
+        return (
+          <HouseChooser
+            getHouseId={this.getHouseId}
+            findHousesOwned={this.findHousesOwned}
+            user={this.state.user}
+            logMeOut={this.logMeOut}
           />
-        ) : null}
-        {this.objectHasContent(this.state.fridge) ? (
-          <BeerFridge
-            fridge={this.state.fridge}
-            drinkFridge={this.drinkFridge}
-            removeFromFridge={this.removeFromFridge}
-            saveCheckout={this.saveCheckout}
-            showMoreInfo={this.state.showMoreInfo}
-            changeShowMoreInfoState={this.changeShowMoreInfoState}
-          />
-        ) : null}
-        <SimpleSearch
-          getAlcName={this.getAlcName}
-          alcSearchRes={this.alcSearchRes}
-          alcApiRes={this.state.alcApiRes}
-          alcSearchSuggestion={this.alcSearchSuggestion}
-          clearSuggestion={this.clearSuggestion}
-          currentPage={this.state.currentPage}
-          alcSearchData={this.alcSearchData}
-          apiSearch={this.apiSearch}
-        />
-        {this.state.alcApiRes.length ? (
-          <DisplaySearchedAlc
-            alcApiRes={this.state.alcApiRes}
-            saveCheckout={this.saveCheckout}
-            checkout={this.state.checkout}
-            objectHasContent={this.objectHasContent}
-            searchData={this.state.searchData}
-            currentPage={this.state.currentPage}
-            pageChanger={this.pageChanger}
-            pageLoading={this.state.pageLoading}
-          />
-        ) : null}
-        {this.state.suggestion.length ? (
-          <DisplaySuggestion
-            suggestion={this.state.suggestion}
-            getAlcName={this.getAlcName}
-            alcSearchRes={this.alcSearchRes}
-            clearSuggestion={this.clearSuggestion}
-          />
-        ) : null}
-        {this.objectHasContent(this.state.checkout) ? (
-          <CheckoutMenu
-            checkout={this.state.checkout}
-            changeQuantCheckout={this.changeQuantCheckout}
-            removeFromCheckout={this.removeFromCheckout}
-            saveToFridge={this.saveToFridge}
-          />
-        ) : null}
-      </div>
-    );
+        );
+      } else {
+        return (
+          <div>
+            <Logout logMeOut={this.logMeOut} />
+            <h1>Beer Fridge</h1>
+            {this.state.showMoreInfo ? (
+              <MoreInfo
+                showMoreInfoId={this.state.showMoreInfoId}
+                fridge={this.state.fridge}
+              />
+            ) : null}
+            {this.objectHasContent(this.state.fridge) ? (
+              <BeerFridge
+                fridge={this.state.fridge}
+                drinkFridge={this.drinkFridge}
+                removeFromFridge={this.removeFromFridge}
+                saveCheckout={this.saveCheckout}
+                showMoreInfo={this.state.showMoreInfo}
+                changeShowMoreInfoState={this.changeShowMoreInfoState}
+              />
+            ) : null}
+            <SimpleSearch
+              getAlcName={this.getAlcName}
+              alcSearchRes={this.alcSearchRes}
+              alcApiRes={this.state.alcApiRes}
+              alcSearchSuggestion={this.alcSearchSuggestion}
+              clearSuggestion={this.clearSuggestion}
+              currentPage={this.state.currentPage}
+              alcSearchData={this.alcSearchData}
+              apiSearch={this.apiSearch}
+            />
+            {this.state.alcApiRes.length ? (
+              <DisplaySearchedAlc
+                alcApiRes={this.state.alcApiRes}
+                saveCheckout={this.saveCheckout}
+                checkout={this.state.checkout}
+                objectHasContent={this.objectHasContent}
+                searchData={this.state.searchData}
+                currentPage={this.state.currentPage}
+                pageChanger={this.pageChanger}
+                pageLoading={this.state.pageLoading}
+              />
+            ) : null}
+            {this.state.suggestion.length ? (
+              <DisplaySuggestion
+                suggestion={this.state.suggestion}
+                getAlcName={this.getAlcName}
+                alcSearchRes={this.alcSearchRes}
+                clearSuggestion={this.clearSuggestion}
+              />
+            ) : null}
+            {this.objectHasContent(this.state.checkout) ? (
+              <CheckoutMenu
+                checkout={this.state.checkout}
+                changeQuantCheckout={this.changeQuantCheckout}
+                removeFromCheckout={this.removeFromCheckout}
+                saveToFridge={this.saveToFridge}
+              />
+            ) : null}
+          </div>
+        );
+      }
+    }
   }
 }
 
