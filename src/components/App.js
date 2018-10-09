@@ -49,7 +49,7 @@ class App extends React.Component {
 
     //Firebase
     const houseId = this.state.houseId;
-    console.log(this.state.houseId);
+    // console.log(this.state.houseId);
     () =>
       (this.ref = base.syncState(`${houseId}/fridge/`, {
         context: this,
@@ -72,7 +72,7 @@ class App extends React.Component {
         houseId
       },
       () => {
-        console.log(this.state.houseId);
+        // console.log(this.state.houseId);
         this.ref = base.syncState(`${houseId}/fridge/`, {
           context: this,
           state: "fridge"
@@ -262,7 +262,7 @@ class App extends React.Component {
     Object.keys(fridge).map(id => {
       if (fridge[id].id === parseInt(key, 0)) {
         fridge[id].in_checkout = false;
-        console.log(fridge[id].in_checkout);
+        // console.log(fridge[id].in_checkout);
       }
       return null;
     });
@@ -286,7 +286,7 @@ class App extends React.Component {
     Object.keys(fridge).map(keys => {
       const fridgeId = fridge[keys].id;
       Object.keys(checkout).map(index => {
-        console.log(typeof index);
+        // console.log(typeof index);
         if (fridgeId === parseInt(index, 0)) {
           checkout[index].purchase_quantity += fridge[index].purchase_quantity;
           checkout[index].purchase_remaining +=
@@ -371,13 +371,13 @@ class App extends React.Component {
       searchData: {},
       showMoreInfo: false,
       currentPage: 1,
-      suggestion: "",
-      checkout: {}
+      suggestion: ""
+      // checkout: {}
     });
   };
 
   authHandler = async authData => {
-    console.log(authData.user);
+    // console.log(authData.user);
     this.setState({
       uid: authData.user.uid,
       user: authData.user
@@ -385,7 +385,7 @@ class App extends React.Component {
   };
 
   authenticate = provider => {
-    console.log("worked");
+    // console.log("worked");
     const authProvider = new firebase.auth[`${provider}AuthProvider`]();
     firebaseApp
       .auth()
@@ -395,15 +395,24 @@ class App extends React.Component {
 
   findHousesOwned = () => {
     const dbRef = firebase.database().ref();
+    let ownedByUser = this.state.ownedByUser;
     dbRef.on("value", data => {
       let house = data.val();
       if (house) {
         Object.keys(house).map(index => {
           if (house[index].owner === this.state.uid) {
-            console.log(index);
+            ownedByUser.push(house[index]);
           }
         });
       }
+      this.setState(
+        {
+          ownedByUser
+        },
+        () => {
+          console.log(this.state.ownedByUser);
+        }
+      );
     });
   };
 

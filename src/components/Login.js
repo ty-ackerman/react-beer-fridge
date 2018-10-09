@@ -1,7 +1,7 @@
 import React from "react";
-import { getFunName } from "../helpers";
-import firebase from "firebase";
-import base, { firebaseApp } from "../base";
+// import { getFunName } from "../helpers";
+// import firebase from "firebase";
+// import base, { firebaseApp } from "../base";
 
 class Login extends React.Component {
   // openHouse = () => {
