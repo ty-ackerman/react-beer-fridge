@@ -366,7 +366,7 @@ class App extends React.Component {
     this.setState({
       uid: null,
       user: null,
-      ownedByUser: null,
+      ownedByUser: [],
       houseId: null,
       alcApiRes: {},
       searchData: {},
@@ -438,6 +438,25 @@ class App extends React.Component {
     });
   };
 
+  nameAllowed = testName => {
+    const dbRef = firebase.database().ref();
+    let allowed = true;
+    dbRef.on("value", data => {
+      let house = data.val();
+      if (house) {
+        Object.keys(house).map(index => {
+          if (index === testName) {
+            if (house[index].owner !== this.state.uid) {
+              allowed = false;
+            }
+          }
+          return null;
+        });
+      }
+    });
+    return allowed;
+  };
+
   render() {
     if (!this.state.uid) {
       return <Login authenticate={this.authenticate} />;
@@ -451,6 +470,7 @@ class App extends React.Component {
           addOwnerToHouse={this.addOwnerToHouse}
           pageLoading={this.state.pageLoading}
           ownedByUser={this.state.ownedByUser}
+          nameAllowed={this.nameAllowed}
         />
       );
     } else {

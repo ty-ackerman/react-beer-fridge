@@ -8,15 +8,25 @@ import OneHouseChooser from "./OneHouseChooser";
 
 //This component will be the second page after the user logs in
 class HouseChooser extends React.Component {
+  state = {
+    incorrect: false
+  };
+
   userInput = React.createRef();
 
   openFridge = e => {
     e.preventDefault();
     //   const houseName = this.userInput.current.value
     const houseName = this.userInput.value.value;
-    this.props.getHouseId(houseName);
-    this.props.addOwnerToHouse(houseName);
-
+    console.log(this.props.nameAllowed(houseName));
+    if (this.props.nameAllowed(houseName)) {
+      this.props.getHouseId(houseName);
+      this.props.addOwnerToHouse(houseName);
+    } else {
+      this.setState({
+        incorrect: true
+      });
+    }
     // console.log(houseName);
     // base.post(`${houseName}/owner`, {
     //   data: this.state.uid
@@ -84,6 +94,9 @@ class HouseChooser extends React.Component {
               defaultValue={getFunName()}
             />
             <button type="submit">Open Fridge</button>
+            {this.state.incorrect ? (
+              <p>House name taken. Please select another.</p>
+            ) : null}
           </form>
           <MDSpinner className="spinner" size={100} />
         </React.Fragment>
@@ -108,10 +121,22 @@ class HouseChooser extends React.Component {
           />
           <button type="submit">Open Fridge</button>
         </form>
-
-        {houseNames.map(house => {
-          return <OneHouseChooser oneHouse={house} key={Object.keys(house)} />;
-        })}
+        {this.state.incorrect ? (
+          <p>House name taken. Please select another.</p>
+        ) : null}
+        {houseNames.length ? (
+          houseNames.map(house => {
+            return (
+              <OneHouseChooser
+                oneHouse={house}
+                key={Object.keys(house)}
+                getHouseId={this.props.getHouseId}
+              />
+            );
+          })
+        ) : (
+          <p>No Houses Saved</p>
+        )}
       </React.Fragment>
     );
   }

@@ -69,7 +69,7 @@ class Login extends React.Component {
         <h2>Inventory Login</h2>
         <p>Sign in to manage your beer inventory</p>
         <button
-          className="github"
+          className="google"
           onClick={() => this.props.authenticate("Google")}
         >
           Log In With Google
