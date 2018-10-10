@@ -86,6 +86,9 @@ class Login extends React.Component {
         >
           Log In With Twitter
         </button>
+        <button className="guest" onClick={() => this.props.loginAsGuest()}>
+          Log In As Guest
+        </button>
       </section>
     );
   }

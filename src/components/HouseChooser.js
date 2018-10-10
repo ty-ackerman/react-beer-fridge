@@ -27,52 +27,11 @@ class HouseChooser extends React.Component {
         incorrect: true
       });
     }
-    // console.log(houseName);
-    // base.post(`${houseName}/owner`, {
-    //   data: this.state.uid
-    // });
-    //Change the page to house/whatever-they-entered
-    // this.props.history.push({
-    //   pathname: `/house/${houseName}`,
-    //   state: { message: "hello" }
-    // });
   };
-
-  //     console.log(authData.user.uid);
-  // const house = await base.fetch(this.props.houseId, { context: this });
-  // console.log(house);
-  //THE CODE BELOW WILL BE REALLY IMPORTANT FOR THE BEER-FRIDGE APP
-
-  // console.log(dbRef);
-  // console.log(Object.keys(data.val()));
-  // if (!house.owner) {
-  //   await base.post(`${this.props.houseId}/owner`, {
-  //     data: authData.user.uid
-  //   });
-  //   this.openFridge();
-  // }
-  // this.setState({
-  //   uid: authData.user.uid,
-  //   owner: house.owner || authData.user.uid
-  // });
-  //   };
 
   componentDidMount() {
     this.props.findHousesOwned();
-
-    // this.authHandler();
   }
-
-  // logMeOut = async () => {
-  //   await firebase.auth().signOut();
-  //   this.setState({
-  //     uid: null
-  //   });
-  //   this.props.history.push({
-  //     pathname: `/`,
-  //     state: { uid: null }
-  //   });
-  // };
 
   render() {
     const houseNames = this.props.ownedByUser;
@@ -90,7 +49,6 @@ class HouseChooser extends React.Component {
               type="text"
               required
               ref={this.userInput}
-              placeholder="House Name"
               defaultValue={getFunName()}
             />
             <button type="submit">Open Fridge</button>

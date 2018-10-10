@@ -11,6 +11,7 @@ import Logout from "./Logout";
 import firebase from "firebase";
 import Login from "./Login";
 import HouseChooser from "./HouseChooser";
+import GuestLogin from "./GuestLogin";
 
 class App extends React.Component {
   state = {
@@ -27,7 +28,8 @@ class App extends React.Component {
     showMoreInfoId: "",
     uid: null,
     user: null,
-    ownedByUser: []
+    ownedByUser: [],
+    guest: false
   };
 
   componentDidUpdate() {
@@ -49,7 +51,7 @@ class App extends React.Component {
 
     //Firebase
     const houseId = this.state.houseId;
-    // console.log(this.state.houseId);
+    console.log(this.state.houseId);
     () => {
       this.ref = base.syncState(`${houseId}/fridge/`, {
         context: this,
@@ -58,8 +60,9 @@ class App extends React.Component {
     };
 
     //Check to see if user is still logged in
+
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
+      if (user.emailVerified) {
         this.authHandler({ user });
       }
     });
@@ -381,17 +384,30 @@ class App extends React.Component {
       searchData: {},
       showMoreInfo: false,
       currentPage: 1,
-      suggestion: ""
+      suggestion: "",
+      guest: false
       // checkout: {}
     });
   };
 
   authHandler = async authData => {
-    // console.log(authData.user);
-    this.setState({
-      uid: authData.user.uid,
-      user: authData.user
-    });
+    if (authData) {
+      console.log(authData);
+      this.setState({
+        uid: authData.user.uid,
+        user: authData.user
+      });
+    }
+  };
+
+  authHandlerGuest = async authData => {
+    if (authData) {
+      console.log(authData);
+      this.setState({
+        uid: authData.uid,
+        user: authData
+      });
+    }
   };
 
   authenticate = provider => {
@@ -431,6 +447,7 @@ class App extends React.Component {
 
   addOwnerToHouse = houseName => {
     //I need to add something here that checks to see if the house already exists
+    console.log(this.state.uid);
     const dbRef = firebase.database().ref();
     dbRef.on("value", data => {
       let house = data.val();
@@ -466,9 +483,53 @@ class App extends React.Component {
     return allowed;
   };
 
+  loginAsGuest = () => {
+    console.log("clicked");
+    let guest = this.state.guest;
+    guest = true;
+    this.setState({
+      guest
+    });
+  };
+
+  makeEmailUid = email => {
+    let uid = this.state.uid;
+    uid = email;
+    this.setState({
+      uid
+    });
+  };
+
+  signInAnon = () => {
+    console.log("line 491");
+    firebaseApp
+      .auth()
+      .signInAnonymously()
+      .then(this.authHandlerGuest);
+  };
+
   render() {
-    if (!this.state.uid) {
-      return <Login authenticate={this.authenticate} />;
+    if (!this.state.uid && !this.state.guest) {
+      return (
+        <Login
+          authenticate={this.authenticate}
+          loginAsGuest={this.loginAsGuest}
+        />
+      );
+    } else if (this.state.guest && !this.state.houseId) {
+      return (
+        <React.Fragment>
+          <Logout logMeOut={this.logMeOut} />
+          <GuestLogin
+            nameAllowed={this.nameAllowed}
+            addOwnerToHouse={this.addOwnerToHouse}
+            getHouseId={this.getHouseId}
+            makeEmailUid={this.makeEmailUid}
+            uid={this.state.uid}
+            signInAnon={this.signInAnon}
+          />
+        </React.Fragment>
+      );
     } else if (this.state.uid && !this.state.houseId) {
       return (
         <HouseChooser
