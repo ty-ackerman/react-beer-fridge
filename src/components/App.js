@@ -11,7 +11,8 @@ import Logout from "./Logout";
 import firebase from "firebase";
 import Login from "./Login";
 import HouseChooser from "./HouseChooser";
-import GuestLogin from "./GuestLogin";
+import ReactDOM from 'react-dom';
+// import GuestLogin from "./GuestLogin";
 
 class App extends React.Component {
   state = {
@@ -51,7 +52,6 @@ class App extends React.Component {
 
     //Firebase
     const houseId = this.state.houseId;
-    console.log(this.state.houseId);
     () => {
       this.ref = base.syncState(`${houseId}/fridge/`, {
         context: this,
@@ -516,21 +516,23 @@ class App extends React.Component {
           loginAsGuest={this.loginAsGuest}
         />
       );
-    } else if (this.state.guest && !this.state.houseId) {
-      return (
-        <React.Fragment>
-          <Logout logMeOut={this.logMeOut} />
-          <GuestLogin
-            nameAllowed={this.nameAllowed}
-            addOwnerToHouse={this.addOwnerToHouse}
-            getHouseId={this.getHouseId}
-            makeEmailUid={this.makeEmailUid}
-            uid={this.state.uid}
-            signInAnon={this.signInAnon}
-          />
-        </React.Fragment>
-      );
-    } else if (this.state.uid && !this.state.houseId) {
+    }
+    // else if (this.state.guest && !this.state.houseId) {
+    //   return (
+    //     <React.Fragment>
+    //       <Logout logMeOut={this.logMeOut} />
+    //       <GuestLogin
+    //         nameAllowed={this.nameAllowed}
+    //         addOwnerToHouse={this.addOwnerToHouse}
+    //         getHouseId={this.getHouseId}
+    //         makeEmailUid={this.makeEmailUid}
+    //         uid={this.state.uid}
+    //         signInAnon={this.signInAnon}
+    //       />
+    //     </React.Fragment>
+    //   );
+    // }
+    else if (this.state.uid && !this.state.houseId) {
       return (
         <HouseChooser
           getHouseId={this.getHouseId}
