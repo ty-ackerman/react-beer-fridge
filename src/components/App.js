@@ -129,6 +129,7 @@ class App extends React.Component {
     e.preventDefault();
     let pageLoading = this.state.pageLoading;
     let currentPage = this.state.currentPage;
+    let alcName = "";
     currentPage = 1;
     pageLoading = true;
     this.setState(
@@ -137,7 +138,15 @@ class App extends React.Component {
         currentPage
       },
       () => {
-        const alcName = alcInput.value.value;
+        console.log(this.state.suggestion);
+        if (!this.state.suggestion) {
+          alcName = alcInput.value.value;
+          console.log("here");
+        } else {
+          alcName = this.state.suggestion;
+          console.log(this.state.suggestion);
+        }
+        console.log(alcName);
         this.getAlcName(alcName);
         axios({
           url: "https://lcboapi.com/products",
@@ -515,13 +524,13 @@ class App extends React.Component {
               pageChanger={this.pageChanger}
               pageLoading={this.state.pageLoading}
             />
-          ) : null}
-          {this.state.suggestion.length ? (
+          ) : this.state.suggestion.length ? (
             <DisplaySuggestion
               suggestion={this.state.suggestion}
               getAlcName={this.getAlcName}
               alcSearchRes={this.alcSearchRes}
               clearSuggestion={this.clearSuggestion}
+              apiSearch={this.apiSearch}
             />
           ) : null}
           {this.objectHasContent(this.state.checkout) ? (
