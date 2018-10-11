@@ -7,26 +7,44 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <h2>Inventory Login</h2>
-        <p>Sign in to manage your beer inventory</p>
+        <h1>
+          Bottles Of Beer
+          <br />
+          On The Wall
+        </h1>
+        <p className="description">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
+          assumenda minus illum voluptatum atque quae ipsa aperiam qui est
+          fugit? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+          Velit, similique.
+        </p>
         <div className="buttonContainer">
           <button
             className="google"
             onClick={() => this.props.authenticate("Google")}
           >
-            Sign In With Google
+            <span>
+              <i class="fab fa-google" />
+            </span>{" "}
+            Log In with Google
           </button>
           <button
             className="facebook"
             onClick={() => this.props.authenticate("Facebook")}
           >
-            Sign In With Facebook
+            <span>
+              <i class="fab fa-facebook-f" />
+            </span>{" "}
+            Log In with Facebook
           </button>
           <button
             className="twitter"
             onClick={() => this.props.authenticate("Twitter")}
           >
-            Sign In With Twitter
+            <span>
+              <i class="fab fa-twitter" />
+            </span>{" "}
+            Log In with Twitter
           </button>
         </div>
         {/* <button className="guest" onClick={() => this.props.loginAsGuest()}>

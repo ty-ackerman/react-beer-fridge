@@ -1,11 +1,16 @@
 div.login
     background: white;
-    padding: 20px;
+    padding: 50px;
     width: 100%;
     height: 600px;
     box-shadow box-shadow
     position relative
-
+    p.description
+        width: 75%
+        text-align center
+        margin 60px auto
+        font-size 2rem
+        color black
 
 .login .buttonContainer 
     width: 100%;
@@ -15,24 +20,28 @@ div.login
     align-items center
     font-size: 2.5rem;
     bottom: 50px
-
-    
+    transform translateX(-50%)
+    left: 50%
     & button
         width: 50%;
-        padding 20px 30px
+        padding 15px 30px
         color white
-        text-transform capitalize
         border: none;
         transition transition
+        margin-top 4px
+        font-weight bold
+        font-size:2rem
+        span
+            margin-right 10px
         &.facebook
             background-color fbBlue
             &:hover
-                background-color lighten(fbBlue, 20%)
+                background-color lighten(fbBlue, 10%)
         &.google
             background-color googleRed
             &:hover
-                background-color lighten(googleRed, 20%)
+                background-color lighten(googleRed, 10%)
         &.twitter
             background-color twitterBlue
             &:hover
-                background-color lighten(twitterBlue, 20%)
+                background-color lighten(twitterBlue, 10%)

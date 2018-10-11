@@ -1,3 +1,30 @@
+#main {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Playfair Display', serif;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 article,
 aside,
 details,
@@ -166,44 +193,39 @@ html {
 }
 body {
   font-size: 1.6rem;
-  background-color: #84dcc6;
+  background-color: #4de2e0;
   margin: 0 auto;
   width: 70%;
   max-width: 1200px;
 }
 h1 {
-  font-size: 2.5rem;
+  font-size: 6rem;
+  text-shadow: 2px 2px #4b4e6d;
+  color: #4de2e0;
+  text-align: center;
+  line-height: 60px;
+  margin: 0;
 }
 h2,
 h3 {
   font-size: 1.8rem;
-}
-#main {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  margin: 0;
 }
 div.login {
   background: #fff;
-  padding: 20px;
+  padding: 50px;
   width: 100%;
   height: 600px;
-  -webkit-box-shadow: 2px 2px 5px #555;
-          box-shadow: 2px 2px 5px #555;
+  -webkit-box-shadow: 2px 2px 5px #4b4e6d;
+          box-shadow: 2px 2px 5px #4b4e6d;
   position: relative;
+}
+div.login p.description {
+  width: 75%;
+  text-align: center;
+  margin: 60px auto;
+  font-size: 2rem;
+  color: #222;
 }
 .login .buttonContainer {
   width: 100%;
@@ -220,31 +242,39 @@ div.login {
           align-items: center;
   font-size: 2.5rem;
   bottom: 50px;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  left: 50%;
 }
 .login .buttonContainer button {
   width: 50%;
-  padding: 20px 30px;
+  padding: 15px 30px;
   color: #fff;
-  text-transform: capitalize;
   border: none;
   -webkit-transition: 0.1s ease-in all;
   transition: 0.1s ease-in all;
+  margin-top: 4px;
+  font-weight: bold;
+  font-size: 2rem;
+}
+.login .buttonContainer button span {
+  margin-right: 10px;
 }
 .login .buttonContainer button.facebook {
   background-color: #3b5998;
 }
 .login .buttonContainer button.facebook:hover {
-  background-color: #5375bc;
+  background-color: #4366ae;
 }
 .login .buttonContainer button.google {
   background-color: #db3236;
 }
 .login .buttonContainer button.google:hover {
-  background-color: #e25b5e;
+  background-color: #df474a;
 }
 .login .buttonContainer button.twitter {
   background-color: #429cd6;
 }
 .login .buttonContainer button.twitter:hover {
-  background-color: #68b0de;
+  background-color: #55a6da;
 }
