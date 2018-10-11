@@ -37,7 +37,7 @@ class HouseChooser extends React.Component {
     const houseNames = this.props.ownedByUser;
     if (this.props.pageLoading) {
       return (
-        <React.Fragment>
+        <div className="house-chooser">
           <Logout logMeOut={this.props.logMeOut} />
           <form action="" className="house-selector" onSubmit={this.openFridge}>
             <h2>
@@ -57,12 +57,12 @@ class HouseChooser extends React.Component {
             ) : null}
           </form>
           <MDSpinner className="spinner" size={100} />
-        </React.Fragment>
+        </div>
       );
     }
 
     return (
-      <React.Fragment>
+      <div className="house-chooser">
         <Logout logMeOut={this.props.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
           <h2>
@@ -95,7 +95,7 @@ class HouseChooser extends React.Component {
         ) : (
           <p>No Houses Saved</p>
         )}
-      </React.Fragment>
+      </div>
     );
   }
 }
