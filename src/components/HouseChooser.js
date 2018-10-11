@@ -40,11 +40,14 @@ class HouseChooser extends React.Component {
         <div className="house-chooser container">
           <Logout logMeOut={this.props.logMeOut} />
           <form action="" className="house-selector" onSubmit={this.openFridge}>
-            <h2>
-              {this.props.user
-                ? this.props.user.displayName
-                : "Please Enter a House Name"}
-            </h2>
+            {this.props.user ? (
+              <h2>
+                Hello, <span>{this.props.user.displayName}</span>
+              </h2>
+            ) : (
+              <h2>Please Enter a House Name</h2>
+            )}
+            <h2 className="create-house">Create New House</h2>
             <input
               type="text"
               required
@@ -61,10 +64,10 @@ class HouseChooser extends React.Component {
               className="spinner"
               size={250}
               borderSize={30}
-              color2="#4de2e0"
               color1="#ff5151"
-              color4="#4de2e0"
+              color2="#4de2e0"
               color3="#ff5151"
+              color4="#4de2e0"
             />
           </div>
         </div>
@@ -75,11 +78,14 @@ class HouseChooser extends React.Component {
       <div className="house-chooser container">
         <Logout logMeOut={this.props.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
-          <h2>
-            {this.props.user
-              ? this.props.user.displayName
-              : "Please Enter a House Name"}
-          </h2>
+          {this.props.user ? (
+            <h2>
+              Hello, <span>{this.props.user.displayName}</span>
+            </h2>
+          ) : (
+            <h2>Please Enter a House Name</h2>
+          )}
+          <h2 className="create-house">Create New House</h2>
           <input
             type="text"
             required
