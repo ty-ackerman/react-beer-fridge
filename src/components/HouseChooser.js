@@ -37,7 +37,7 @@ class HouseChooser extends React.Component {
     const houseNames = this.props.ownedByUser;
     if (this.props.pageLoading) {
       return (
-        <div className="house-chooser">
+        <div className="house-chooser container">
           <Logout logMeOut={this.props.logMeOut} />
           <form action="" className="house-selector" onSubmit={this.openFridge}>
             <h2>
@@ -56,13 +56,23 @@ class HouseChooser extends React.Component {
               <p>House name taken. Please select another.</p>
             ) : null}
           </form>
-          <MDSpinner className="spinner" size={100} />
+          <div className="spinner-container">
+            <MDSpinner
+              className="spinner"
+              size={250}
+              borderSize={30}
+              color2="#4de2e0"
+              color1="#ff5151"
+              color4="#4de2e0"
+              color3="#ff5151"
+            />
+          </div>
         </div>
       );
     }
 
     return (
-      <div className="house-chooser">
+      <div className="house-chooser container">
         <Logout logMeOut={this.props.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
           <h2>
