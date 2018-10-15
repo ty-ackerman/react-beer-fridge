@@ -19,7 +19,7 @@
     justify-content center
     height 100%
 
-.house-chooser .create-house
+.house-chooser .house-chooser-title
     font-size 2.5rem
     width: 100%;
     text-align center
@@ -27,3 +27,30 @@
     color primary
     text-shadow 1px 1px darkBlue
     font-weight bold
+
+form .form-input-container
+    display flex
+    justify-content center
+    align-items flex-start
+    input[type="text"]
+        background-color lighten(primary, 90%)
+        border none
+        width: 50%
+        text-align center
+        font-size: 2.8rem
+        // font-weight bold
+
+.all-houses
+    display flex
+    flex-flow row wrap
+    justify-content space-between
+.one-house
+    // display block
+    cursor pointer
+    width 49%
+    height: 150px
+    margin-bottom 2%
+    // border red solid 1px
+    transition transition
+    &:hover
+        background-color lighten(primary, 90%)

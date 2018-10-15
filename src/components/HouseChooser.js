@@ -47,18 +47,23 @@ class HouseChooser extends React.Component {
             ) : (
               <h2>Please Enter a House Name</h2>
             )}
-            <h2 className="create-house">Create New House</h2>
-            <input
-              type="text"
-              required
-              ref={this.userInput}
-              defaultValue={getFunName()}
-            />
-            <button type="submit">Open Fridge</button>
-            {this.state.incorrect ? (
-              <p>House name taken. Please select another.</p>
-            ) : null}
+            <h2 className="create-house house-chooser-title">
+              Create New House
+            </h2>
+            <div className="form-input-container">
+              <input
+                type="text"
+                required
+                ref={this.userInput}
+                defaultValue={getFunName()}
+              />
+              {/* <button type="submit">Submit</button> */}
+              {this.state.incorrect ? (
+                <p>House name taken. Please select another.</p>
+              ) : null}
+            </div>
           </form>
+          <h2 className="house-chooser-title">Select From Existing Houses</h2>
           <div className="spinner-container">
             <MDSpinner
               className="spinner"
@@ -85,32 +90,37 @@ class HouseChooser extends React.Component {
           ) : (
             <h2>Please Enter a House Name</h2>
           )}
-          <h2 className="create-house">Create New House</h2>
-          <input
-            type="text"
-            required
-            ref={this.userInput}
-            placeholder="House Name"
-            defaultValue={getFunName()}
-          />
-          <button type="submit">Open Fridge</button>
+          <h2 className="create-house house-chooser-title">Create New House</h2>
+          <div className="form-input-container">
+            <input
+              type="text"
+              required
+              ref={this.userInput}
+              placeholder="House Name"
+              defaultValue={getFunName()}
+            />
+            {/* <button type="submit">Submit</button> */}
+          </div>
         </form>
         {this.state.incorrect ? (
           <p>House name taken. Please select another.</p>
         ) : null}
-        {houseNames.length ? (
-          houseNames.map(house => {
-            return (
-              <OneHouseChooser
-                oneHouse={house}
-                key={Object.keys(house)}
-                getHouseId={this.props.getHouseId}
-              />
-            );
-          })
-        ) : (
-          <p>No Houses Saved</p>
-        )}
+        <h2 className="house-chooser-title">Select From Existing Houses</h2>
+        <div className="all-houses">
+          {houseNames.length ? (
+            houseNames.map(house => {
+              return (
+                <OneHouseChooser
+                  oneHouse={house}
+                  key={Object.keys(house)}
+                  getHouseId={this.props.getHouseId}
+                />
+              );
+            })
+          ) : (
+            <p>No Houses Saved</p>
+          )}
+        </div>
       </div>
     );
   }

@@ -562,7 +562,7 @@ class App extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div className="container">
           <Logout logMeOut={this.logMeOut} />
           <BackButton backToHouseChooser={this.backToHouseChooser} />
           <h1>Beer Fridge</h1>

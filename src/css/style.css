@@ -1,7 +1,6 @@
 #main {
   position: relative;
   width: 100%;
-  height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -20,10 +19,11 @@
   background-color: #fff;
   padding: 50px;
   width: 100%;
-  height: 600px;
+  margin: 100px 0;
   -webkit-box-shadow: 2px 2px 5px #222;
           box-shadow: 2px 2px 5px #222;
   position: relative;
+  min-height: calc(100vh - 200px);
 }
 h1,
 h2,
@@ -247,7 +247,7 @@ h3 {
           justify-content: center;
   height: 100%;
 }
-.house-chooser .create-house {
+.house-chooser .house-chooser-title {
   font-size: 2.5rem;
   width: 100%;
   text-align: center;
@@ -256,11 +256,53 @@ h3 {
   text-shadow: 1px 1px #4b4e6d;
   font-weight: bold;
 }
+form .form-input-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+form .form-input-container input[type="text"] {
+  background-color: #fffae5;
+  border: none;
+  width: 50%;
+  text-align: center;
+  font-size: 2.8rem;
+}
+.all-houses {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.one-house {
+  cursor: pointer;
+  width: 49%;
+  height: 150px;
+  margin-bottom: 2%;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.one-house:hover {
+  background-color: #fffae5;
+}
 div.login {
   background: #fff;
   padding: 50px;
   width: 100%;
-  height: 600px;
+  height: calc(100vh - 200px);
+  margin: 100px 0;
   -webkit-box-shadow: 2px 2px 5px #222;
           box-shadow: 2px 2px 5px #222;
   position: relative;

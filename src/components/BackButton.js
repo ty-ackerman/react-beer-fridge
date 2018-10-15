@@ -4,9 +4,7 @@ class BackButton extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.backToHouseChooser}>
-          Choose Another House
-        </button>
+        <button onClick={this.props.backToHouseChooser}>Back</button>
       </div>
     );
   }
