@@ -11,7 +11,8 @@ import Logout from "./Logout";
 import firebase from "firebase";
 import Login from "./Login";
 import HouseChooser from "./HouseChooser";
-import ReactDOM from 'react-dom';
+import BackButton from "./BackButton";
+import ReactDOM from "react-dom";
 // import GuestLogin from "./GuestLogin";
 
 class App extends React.Component {
@@ -501,11 +502,25 @@ class App extends React.Component {
   };
 
   signInAnon = () => {
-    console.log("line 491");
     firebaseApp
       .auth()
       .signInAnonymously()
       .then(this.authHandlerGuest);
+  };
+
+  backToHouseChooser = () => {
+    console.log("clicked");
+    this.setState({
+      houseId: null,
+      alcApiRes: {},
+      searchData: {},
+      showMoreInfo: false,
+      currentPage: 1,
+      suggestion: "",
+      guest: false,
+      ownedByUser: []
+      // checkout: {}
+    });
   };
 
   render() {
@@ -549,6 +564,7 @@ class App extends React.Component {
       return (
         <div>
           <Logout logMeOut={this.logMeOut} />
+          <BackButton backToHouseChooser={this.backToHouseChooser} />
           <h1>Beer Fridge</h1>
           {this.state.showMoreInfo ? (
             <MoreInfo
