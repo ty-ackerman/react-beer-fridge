@@ -219,6 +219,8 @@ h2,
 h3 {
   font-size: 1.8rem;
   margin: 0;
+  width: 100%;
+  text-align: center;
 }
 .logout-button {
   position: absolute;
@@ -274,6 +276,9 @@ form .form-input-container input[type="text"] {
   text-align: center;
   font-size: 2.8rem;
 }
+.test {
+  display: none;
+}
 .all-houses {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -287,15 +292,82 @@ form .form-input-container input[type="text"] {
           justify-content: space-between;
 }
 .one-house {
-  cursor: pointer;
+  position: relative;
   width: 49%;
   height: 150px;
   margin-bottom: 2%;
   -webkit-transition: 0.15s ease-in all;
   transition: 0.15s ease-in all;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 0.5px solid transparent;
+  overflow: hidden;
 }
 .one-house:hover {
-  background-color: #fffae5;
+  border: 0.5px solid #d3d3d3;
+  border-radius: 50px;
+}
+.one-house:hover .test {
+  display: inline-block;
+}
+.one-house:hover .preview-image-container {
+  -webkit-filter: grayscale(0);
+          filter: grayscale(0);
+}
+.one-house:hover .select {
+  bottom: 0;
+  -webkit-filter: grayscale(0);
+          filter: grayscale(0);
+}
+.preview-image-container {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #fff;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.preview-image-container .preview-image {
+  max-width: 25%;
+}
+.preview-image-container .preview-image img {
+  max-width: 100%;
+}
+.select {
+  position: absolute;
+  bottom: -60px;
+  padding: 5px 15px;
+  background-color: #ffd000;
+  color: #fff;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
+  cursor: pointer;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.select:hover {
+  background-color: #ffd726;
 }
 div.login {
   background: #fff;

@@ -39,6 +39,8 @@ form .form-input-container
         text-align center
         font-size: 2.8rem
         // font-weight bold
+.test
+    display none
 
 .all-houses
     display flex
@@ -46,11 +48,54 @@ form .form-input-container
     justify-content space-between
 .one-house
     // display block
-    cursor pointer
+    position relative
     width 49%
     height: 150px
     margin-bottom 2%
     // border red solid 1px
     transition transition
+    display flex
+    flex-flow row wrap
+    justify-content center
+    border .5px solid transparent
+    overflow hidden
     &:hover
-        background-color lighten(primary, 90%)
+        border .5px solid lightgrey
+        border-radius 50px
+        .test
+            display inline-block
+        .preview-image-container
+            filter grayscale(0)
+        .select
+            bottom 0
+            filter grayscale(0)
+
+
+
+.preview-image-container
+    width: 80%
+    // max-height: 80%
+    display: flex
+    flex-flow row wrap
+    align-items center
+    justify-content: center
+    background white
+    filter grayscale(100%)
+    transition transition
+    .preview-image 
+        max-width 25%
+        img
+            max-width 100%
+
+
+.select
+    position absolute
+    bottom -60px
+    padding 5px 15px
+    background-color primary
+    color white
+    filter grayscale(100%)
+    cursor pointer
+    transition transition
+    &:hover
+        background-color lighten(primary, 15%)
