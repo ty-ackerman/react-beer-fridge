@@ -60,8 +60,7 @@ form .form-input-container
     border .5px solid transparent
     overflow hidden
     &:hover
-        border .5px solid lightgrey
-        border-radius 50px
+        transform scale(1.1)
         .test
             display inline-block
         .preview-image-container
@@ -99,3 +98,8 @@ form .form-input-container
     transition transition
     &:hover
         background-color lighten(primary, 15%)
+
+.no-items 
+    color primary
+    position: absolute
+    top -40px

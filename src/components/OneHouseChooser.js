@@ -12,7 +12,7 @@ class OneHouseChooser extends React.Component {
     const images = this.state.images;
     if (fridge) {
       Object.keys(fridge).map(stats => {
-        if (images.length < 5) {
+        if (images.length < 4) {
           images.push(fridge[stats].image_thumb_url);
         }
         return null;
@@ -33,13 +33,17 @@ class OneHouseChooser extends React.Component {
       <div className="one-house">
         <h3>{houseName}</h3>
         <div className="preview-image-container">
-          {images.map(image => {
-            return (
-              <div className="preview-image">
-                <img src={image} alt="" />
-              </div>
-            );
-          })}
+          {images.length ? (
+            images.map(image => {
+              return (
+                <div className="preview-image">
+                  <img src={image} alt="" />
+                </div>
+              );
+            })
+          ) : (
+            <p className="no-items">No Items Saved</p>
+          )}
         </div>
         <p className="select" onClick={() => this.props.getHouseId(houseName)}>
           Select

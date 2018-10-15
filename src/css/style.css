@@ -312,8 +312,8 @@ form .form-input-container input[type="text"] {
   overflow: hidden;
 }
 .one-house:hover {
-  border: 0.5px solid #d3d3d3;
-  border-radius: 50px;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 .one-house:hover .test {
   display: inline-block;
@@ -368,6 +368,11 @@ form .form-input-container input[type="text"] {
 }
 .select:hover {
   background-color: #ffd726;
+}
+.no-items {
+  color: #ffd000;
+  position: absolute;
+  top: -40px;
 }
 div.login {
   background: #fff;
