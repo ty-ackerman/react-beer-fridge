@@ -63,7 +63,9 @@ class HouseChooser extends React.Component {
               ) : null}
             </div>
           </form>
-          <h2 className="house-chooser-title">Select From Existing Houses</h2>
+          <h2 className="house-chooser-title house-chooser-title2">
+            Select From Existing Houses
+          </h2>
           <div className="spinner-container">
             <MDSpinner
               className="spinner"
@@ -84,7 +86,7 @@ class HouseChooser extends React.Component {
         <Logout logMeOut={this.props.logMeOut} />
         <form action="" className="house-selector" onSubmit={this.openFridge}>
           {this.props.user ? (
-            <h2>
+            <h2 className="greeting">
               Hello, <span>{this.props.user.displayName}</span>
             </h2>
           ) : (
@@ -103,9 +105,11 @@ class HouseChooser extends React.Component {
           </div>
         </form>
         {this.state.incorrect ? (
-          <p>House name taken. Please select another.</p>
+          <p className="name-taken">House name taken. Please select another.</p>
         ) : null}
-        <h2 className="house-chooser-title">Select From Existing Houses</h2>
+        <h2 className="house-chooser-title house-chooser-title2">
+          Select From Existing Houses
+        </h2>
         <div className="all-houses">
           {houseNames.length ? (
             houseNames.map(house => {
@@ -118,7 +122,11 @@ class HouseChooser extends React.Component {
               );
             })
           ) : (
-            <p>No Houses Saved</p>
+            <p className="no-houses">
+              No houses saved... yet
+              <br />
+              Create a new house to save alcohol inventory
+            </p>
           )}
         </div>
       </div>

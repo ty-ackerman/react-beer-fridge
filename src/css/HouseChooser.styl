@@ -20,7 +20,7 @@
     height 100%
 
 .house-chooser .house-chooser-title
-    font-size 2.5rem
+    font-size 3rem
     width: 100%;
     text-align center
     margin 30px 0
@@ -28,10 +28,12 @@
     text-shadow 1px 1px darkBlue
     font-weight bold
 
+
 form .form-input-container
     display flex
     justify-content center
     align-items flex-start
+    margin-bottom 40px
     input[type="text"]
         background-color lighten(primary, 90%)
         border none
@@ -39,19 +41,17 @@ form .form-input-container
         text-align center
         font-size: 2.8rem
         // font-weight bold
-.test
-    display none
 
 .all-houses
     display flex
     flex-flow row wrap
-    justify-content space-between
+    justify-content space-around
 .one-house
     // display block
     position relative
-    width 49%
+    width 50%
     height: 150px
-    margin-bottom 2%
+    margin-bottom 5%
     // border red solid 1px
     transition transition
     display flex
@@ -70,7 +70,6 @@ form .form-input-container
             filter grayscale(0)
 
 
-
 .preview-image-container
     width: 80%
     // max-height: 80%
@@ -83,8 +82,10 @@ form .form-input-container
     transition transition
     .preview-image 
         max-width 25%
+        height 125px
         img
             max-width 100%
+            height 100%
 
 
 .select
@@ -102,4 +103,24 @@ form .form-input-container
 .no-items 
     color primary
     position: absolute
-    top -40px
+    top -50px
+
+.name-taken
+    color red
+    position absolute
+    left 50%
+    transform translateX(-50%)
+    top 200px
+    font-style italic
+
+.house-chooser-title2
+    margin-bottom 50px !important
+
+.greeting
+    text-align left
+    font-weight bold
+    display none
+
+p.no-houses
+    text-align center
+    font-style italic
