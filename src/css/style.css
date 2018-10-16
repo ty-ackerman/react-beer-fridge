@@ -25,6 +25,27 @@
   position: relative;
   min-height: calc(100vh - 200px);
 }
+.defaultButton {
+  position: absolute;
+  padding: 10px 25px;
+  background: #ffd000;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.defaultButton:hover {
+  background-color: #ffd726;
+}
+.backButton {
+  right: 140px;
+  top: 20px;
+}
+.changeDisplayButton {
+  top: 20px;
+  left: 20px;
+}
 h1,
 h2,
 h3,
@@ -223,19 +244,8 @@ h3 {
   text-align: center;
 }
 .logout-button {
-  position: absolute;
   right: 20px;
   top: 20px;
-  padding: 10px 25px;
-  background: #ffd000;
-  border: none;
-  color: #fff;
-  font-weight: bold;
-  -webkit-transition: 0.15s ease-in all;
-  transition: 0.15s ease-in all;
-}
-.logout-button:hover {
-  background-color: #ffd726;
 }
 .spinner-container {
   display: -webkit-box;
@@ -393,6 +403,9 @@ form .form-input-container input[type="text"] {
 p.no-houses {
   text-align: center;
   font-style: italic;
+}
+.one-house h3 {
+  font-size: 2.5rem;
 }
 div.login {
   background: #fff;

@@ -12,7 +12,8 @@ import firebase from "firebase";
 import Login from "./Login";
 import HouseChooser from "./HouseChooser";
 import BackButton from "./BackButton";
-import ReactDOM from "react-dom";
+import ChangeDisplay from "./ChangeDisplay";
+// import ReactDOM from "react-dom";
 // import GuestLogin from "./GuestLogin";
 
 class App extends React.Component {
@@ -31,7 +32,8 @@ class App extends React.Component {
     uid: null,
     user: null,
     ownedByUser: [],
-    guest: false
+    guest: false,
+    displayFridge: false
   };
 
   componentDidUpdate() {
@@ -317,7 +319,8 @@ class App extends React.Component {
     this.setState({
       checkout,
       fridge,
-      alcApiRes
+      alcApiRes,
+      displayFridge: true
     });
   };
 
@@ -509,7 +512,8 @@ class App extends React.Component {
   };
 
   backToHouseChooser = () => {
-    console.log("clicked");
+    // console.log("clicked");
+    base.removeBinding(this.ref);
     this.setState({
       houseId: null,
       alcApiRes: {},
@@ -518,9 +522,36 @@ class App extends React.Component {
       currentPage: 1,
       suggestion: "",
       guest: false,
-      ownedByUser: []
+      ownedByUser: [],
+      displayFridge: false
       // checkout: {}
     });
+  };
+
+  showFridge = () => {
+    let displayFridge = this.state.displayFridge;
+    displayFridge === true ? (displayFridge = false) : (displayFridge = true);
+    this.setState({
+      displayFridge
+    });
+  };
+
+  showFridgeOnPageLoad = () => {
+    console.log(this.state.fridge);
+    let displayFridge = this.state.displayFridge;
+    if (this.objectHasContent(this.state.fridge)) {
+      displayFridge = true;
+      this.setState({
+        displayFridge
+      });
+      return true;
+    } else {
+      displayFridge = false;
+      this.setState({
+        displayFridge
+      });
+      return false;
+    }
   };
 
   render() {
@@ -532,6 +563,7 @@ class App extends React.Component {
         />
       );
     }
+
     // else if (this.state.guest && !this.state.houseId) {
     //   return (
     //     <React.Fragment>
@@ -564,7 +596,17 @@ class App extends React.Component {
       return (
         <div className="container">
           <Logout logMeOut={this.logMeOut} />
-          <BackButton backToHouseChooser={this.backToHouseChooser} />
+          <BackButton
+            backToHouseChooser={this.backToHouseChooser}
+            showFridgeOnPageLoad={this.showFridgeOnPageLoad}
+          />
+          {this.objectHasContent(this.state.fridge) ? (
+            <ChangeDisplay
+              showFridge={this.showFridge}
+              displayFridge={this.state.displayFridge}
+            />
+          ) : null}
+
           <h1>Beer Fridge</h1>
           {this.state.showMoreInfo ? (
             <MoreInfo
@@ -572,7 +614,8 @@ class App extends React.Component {
               fridge={this.state.fridge}
             />
           ) : null}
-          {this.objectHasContent(this.state.fridge) ? (
+          {this.objectHasContent(this.state.fridge) &&
+          this.state.displayFridge ? (
             <BeerFridge
               fridge={this.state.fridge}
               drinkFridge={this.drinkFridge}
@@ -581,37 +624,40 @@ class App extends React.Component {
               showMoreInfo={this.state.showMoreInfo}
               changeShowMoreInfoState={this.changeShowMoreInfoState}
             />
-          ) : null}
-          <SimpleSearch
-            getAlcName={this.getAlcName}
-            alcSearchRes={this.alcSearchRes}
-            alcApiRes={this.state.alcApiRes}
-            alcSearchSuggestion={this.alcSearchSuggestion}
-            clearSuggestion={this.clearSuggestion}
-            currentPage={this.state.currentPage}
-            alcSearchData={this.alcSearchData}
-            apiSearch={this.apiSearch}
-          />
-          {this.state.alcApiRes.length ? (
-            <DisplaySearchedAlc
-              alcApiRes={this.state.alcApiRes}
-              saveCheckout={this.saveCheckout}
-              checkout={this.state.checkout}
-              objectHasContent={this.objectHasContent}
-              searchData={this.state.searchData}
-              currentPage={this.state.currentPage}
-              pageChanger={this.pageChanger}
-              pageLoading={this.state.pageLoading}
-            />
-          ) : this.state.suggestion.length ? (
-            <DisplaySuggestion
-              suggestion={this.state.suggestion}
-              getAlcName={this.getAlcName}
-              alcSearchRes={this.alcSearchRes}
-              clearSuggestion={this.clearSuggestion}
-              apiSearch={this.apiSearch}
-            />
-          ) : null}
+          ) : (
+            <React.Fragment>
+              <SimpleSearch
+                getAlcName={this.getAlcName}
+                alcSearchRes={this.alcSearchRes}
+                alcApiRes={this.state.alcApiRes}
+                alcSearchSuggestion={this.alcSearchSuggestion}
+                clearSuggestion={this.clearSuggestion}
+                currentPage={this.state.currentPage}
+                alcSearchData={this.alcSearchData}
+                apiSearch={this.apiSearch}
+              />
+              {this.state.alcApiRes.length ? (
+                <DisplaySearchedAlc
+                  alcApiRes={this.state.alcApiRes}
+                  saveCheckout={this.saveCheckout}
+                  checkout={this.state.checkout}
+                  objectHasContent={this.objectHasContent}
+                  searchData={this.state.searchData}
+                  currentPage={this.state.currentPage}
+                  pageChanger={this.pageChanger}
+                  pageLoading={this.state.pageLoading}
+                />
+              ) : this.state.suggestion.length ? (
+                <DisplaySuggestion
+                  suggestion={this.state.suggestion}
+                  getAlcName={this.getAlcName}
+                  alcSearchRes={this.alcSearchRes}
+                  clearSuggestion={this.clearSuggestion}
+                  apiSearch={this.apiSearch}
+                />
+              ) : null}
+            </React.Fragment>
+          )}
           {this.objectHasContent(this.state.checkout) ? (
             <CheckoutMenu
               checkout={this.state.checkout}
