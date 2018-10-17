@@ -19,12 +19,14 @@
     &:hover
         .one-alc-info
             background-color backgroundBlue
+            color primary
         button
             position absolute
             bottom -30px
     h2
         font-size 2.5rem
         height 7rem
+        overflow hidden
     &-info
         text-align center
         background-color lighten(backgroundBlue, 25%)
@@ -36,6 +38,10 @@
         position relative
         transition transition
         padding 10px 0
+        .origin
+            font-weight bold
+        .price
+            margin-bottom 5px
         button
             position absolute
             width 100%

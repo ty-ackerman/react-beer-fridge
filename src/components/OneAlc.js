@@ -32,9 +32,9 @@ class OneAlc extends React.Component {
         <img src={image_thumb_url} alt="" />
         <div className="one-alc-info">
           <img src={this.flag} alt="" />
-          <p>{origin}</p>
+          <p className="origin">Origin - {origin}</p>
+          <p className="price">{formatPrice(price_in_cents)}</p>
           <p>{container}</p>
-          <p>{formatPrice(price_in_cents)}</p>
           <button>{in_checkout ? <p>In Checkout</p> : <p />}</button>
           {in_checkout ? (
             <button

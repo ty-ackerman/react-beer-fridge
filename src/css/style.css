@@ -510,6 +510,7 @@ div.login p.description {
 }
 .one-alc:hover .one-alc-info {
   background-color: #3b5998;
+  color: #ffd000;
 }
 .one-alc:hover button {
   position: absolute;
@@ -518,6 +519,7 @@ div.login p.description {
 .one-alc h2 {
   font-size: 2.5rem;
   height: 7rem;
+  overflow: hidden;
 }
 .one-alc-info {
   text-align: center;
@@ -529,6 +531,12 @@ div.login p.description {
   -webkit-transition: 0.15s ease-in all;
   transition: 0.15s ease-in all;
   padding: 10px 0;
+}
+.one-alc-info .origin {
+  font-weight: bold;
+}
+.one-alc-info .price {
+  margin-bottom: 5px;
 }
 .one-alc-info button {
   position: absolute;
