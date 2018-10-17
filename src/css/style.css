@@ -475,3 +475,21 @@ div.login p.description {
 .login .buttonContainer button.twitter:hover {
   background-color: #55a6da;
 }
+.page-name {
+  margin-top: 40px;
+}
+.searched-item-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.one-alc {
+  width: 33%;
+  height: 600px;
+}

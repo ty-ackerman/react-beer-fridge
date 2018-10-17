@@ -607,7 +607,7 @@ class App extends React.Component {
             />
           ) : null}
 
-          <h1>{this.state.houseId[0]}</h1>
+          <h1 className="page-name">{this.state.houseId[0]}</h1>
           {this.state.showMoreInfo ? (
             <MoreInfo
               showMoreInfoId={this.state.showMoreInfoId}

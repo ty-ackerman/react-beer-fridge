@@ -20,7 +20,7 @@ class OneAlc extends React.Component {
     } = this.props.index;
     const container = this.props.index.package;
     return (
-      <div>
+      <div className="one-alc">
         <h2>{name}</h2>
         <img src={image_thumb_url} alt="" />
         <p>{origin}</p>

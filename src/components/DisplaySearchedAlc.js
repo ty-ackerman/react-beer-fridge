@@ -25,7 +25,7 @@ class DisplaySearchedAlc extends React.Component {
           Displaying results {pageStart} - {pageEnd} of{" "}
           {this.props.searchData.total_record_count} total:
         </p>
-        <ul>
+        <ul className="searched-item-container">
           {this.props.alcApiRes.map(key => {
             return (
               <OneAlc
