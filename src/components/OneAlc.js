@@ -9,6 +9,13 @@ class OneAlc extends React.Component {
     this.props.saveCheckout(newSave, id);
   };
 
+  componentDidMount() {
+    () => {
+      const flag = this.props.index["flag"];
+      console.log(flag);
+    };
+  }
+
   render() {
     const {
       name,
@@ -24,6 +31,7 @@ class OneAlc extends React.Component {
         <h2>{name}</h2>
         <img src={image_thumb_url} alt="" />
         <div className="one-alc-info">
+          <img src={this.flag} alt="" />
           <p>{origin}</p>
           <p>{container}</p>
           <p>{formatPrice(price_in_cents)}</p>
