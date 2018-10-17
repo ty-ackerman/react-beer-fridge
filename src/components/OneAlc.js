@@ -14,7 +14,7 @@ class OneAlc extends React.Component {
       name,
       origin,
       price_in_cents,
-      // id,
+      id,
       in_checkout,
       image_thumb_url
     } = this.props.index;
@@ -23,14 +23,22 @@ class OneAlc extends React.Component {
       <div className="one-alc">
         <h2>{name}</h2>
         <img src={image_thumb_url} alt="" />
-        <p>{origin}</p>
-        <p>{container}</p>
-        <p>{formatPrice(price_in_cents)}</p>
-        {in_checkout ? (
-          <p>In Checkout!!</p>
-        ) : (
-          <button onClick={this.handleClick}>Save this booze!!</button>
-        )}
+        <div className="one-alc-info">
+          <p>{origin}</p>
+          <p>{container}</p>
+          <p>{formatPrice(price_in_cents)}</p>
+          <button>{in_checkout ? <p>In Checkout</p> : <p />}</button>
+          {in_checkout ? (
+            <button
+              className="in-checkout"
+              onClick={() => this.props.removeFromCheckout(id)}
+            >
+              Remove from Cart
+            </button>
+          ) : (
+            <button onClick={this.handleClick}>Add to Cart</button>
+          )}
+        </div>
       </div>
     );
   }

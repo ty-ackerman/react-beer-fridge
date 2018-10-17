@@ -36,7 +36,7 @@
   transition: 0.15s ease-in all;
 }
 .defaultButton:hover {
-  background-color: #ffd726;
+  background-color: #ffdc40;
 }
 .backButton {
   right: 140px;
@@ -243,6 +243,9 @@ h3 {
   width: 100%;
   text-align: center;
 }
+p {
+  margin: 0;
+}
 .logout-button {
   right: 20px;
   top: 20px;
@@ -376,7 +379,7 @@ form .form-input-container input[type="text"] {
   transition: 0.15s ease-in all;
 }
 .select:hover {
-  background-color: #ffd726;
+  background-color: #ffdc40;
 }
 .no-items {
   color: #ffd000;
@@ -461,19 +464,19 @@ div.login p.description {
   background-color: #3b5998;
 }
 .login .buttonContainer button.facebook:hover {
-  background-color: #4366ae;
+  background-color: #5d7dc0;
 }
 .login .buttonContainer button.google {
   background-color: #db3236;
 }
 .login .buttonContainer button.google:hover {
-  background-color: #df474a;
+  background-color: #e46568;
 }
 .login .buttonContainer button.twitter {
   background-color: #429cd6;
 }
 .login .buttonContainer button.twitter:hover {
-  background-color: #55a6da;
+  background-color: #71b5e0;
 }
 .page-name {
   margin-top: 40px;
@@ -490,6 +493,61 @@ div.login p.description {
       justify-content: space-around;
 }
 .one-alc {
-  width: 33%;
-  height: 600px;
+  width: 30%;
+  margin-top: 20px;
+  height: 550px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 10;
+}
+.one-alc:hover .one-alc-info {
+  background-color: #3b5998;
+}
+.one-alc:hover button {
+  position: absolute;
+  bottom: -30px;
+}
+.one-alc h2 {
+  font-size: 2.5rem;
+  height: 7rem;
+}
+.one-alc-info {
+  text-align: center;
+  background-color: #5d7dc0;
+  border-radius: 2px;
+  color: #fff;
+  width: 100%;
+  position: relative;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+  padding: 10px 0;
+}
+.one-alc-info button {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: #ffd000;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  z-index: -1;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.one-alc-info button:hover {
+  background-color: #ffdc40;
+}
+.one-alc-info button.in-checkout {
+  background-color: #f00;
+  bottom: -30px;
 }

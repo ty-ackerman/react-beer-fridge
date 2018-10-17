@@ -607,7 +607,11 @@ class App extends React.Component {
             />
           ) : null}
 
-          <h1 className="page-name">{this.state.houseId[0]}</h1>
+          <h1 className="page-name">
+            {typeof this.state.houseId === "array"
+              ? this.state.houseId[0]
+              : this.state.houseId}
+          </h1>
           {this.state.showMoreInfo ? (
             <MoreInfo
               showMoreInfoId={this.state.showMoreInfoId}
@@ -646,6 +650,7 @@ class App extends React.Component {
                   currentPage={this.state.currentPage}
                   pageChanger={this.pageChanger}
                   pageLoading={this.state.pageLoading}
+                  removeFromCheckout={this.removeFromCheckout}
                 />
               ) : this.state.suggestion.length ? (
                 <DisplaySuggestion

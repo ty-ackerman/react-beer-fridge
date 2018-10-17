@@ -7,5 +7,49 @@
     justify-content space-around
 
 .one-alc
-    width 33%
-    height 600px
+    width 30%
+    margin-top 20px
+    height 550px
+    // border 2px solid black
+    display flex
+    flex-flow column wrap
+    align-items center
+    z-index 10
+    // overflow hidden
+    &:hover
+        .one-alc-info
+            background-color backgroundBlue
+        button
+            position absolute
+            bottom -30px
+    h2
+        font-size 2.5rem
+        height 7rem
+    &-info
+        text-align center
+        background-color lighten(backgroundBlue, 25%)
+        border-radius 2px
+        // background-color backgroundBlue
+        color white
+        // font-weight bold
+        width 100%
+        position relative
+        transition transition
+        padding 10px 0
+        button
+            position absolute
+            width 100%
+            bottom 0
+            left 0
+            background primary
+            color white
+            border none
+            font-weight bold
+            padding 5px
+            z-index -1
+            transition transition
+            &:hover
+                background-color lighten(primary, 25%)
+            &.in-checkout
+                background-color red
+                bottom -30px
