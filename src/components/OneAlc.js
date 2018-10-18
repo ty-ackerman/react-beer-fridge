@@ -29,9 +29,12 @@ class OneAlc extends React.Component {
     return (
       <div className="one-alc">
         <h2>{name}</h2>
-        <img src={image_thumb_url} alt="" />
+        <img
+          src={image_thumb_url ? image_thumb_url : "./assets/no-image.jpeg"}
+          alt=""
+        />
         <div className="one-alc-info">
-          <img src={this.flag} alt="" />
+          {/* <img src={this.flag} alt="" /> */}
           <p className="origin">Origin - {origin}</p>
           <p className="price">{formatPrice(price_in_cents)}</p>
           <p>{container}</p>
