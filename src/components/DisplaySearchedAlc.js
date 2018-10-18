@@ -15,16 +15,16 @@ class DisplaySearchedAlc extends React.Component {
       pageStart + this.props.searchData.current_page_record_count - 1;
     return (
       <div>
-        <ScrollPage
-          searchData={this.props.searchData}
-          currentPage={this.props.currentPage}
-          pageChanger={this.props.pageChanger}
-        />
         <h2>DisplaySearchedAlc</h2>
         <p>
           Displaying results {pageStart} - {pageEnd} of{" "}
           {this.props.searchData.total_record_count} total:
         </p>
+        <ScrollPage
+          searchData={this.props.searchData}
+          currentPage={this.props.currentPage}
+          pageChanger={this.props.pageChanger}
+        />
         <ul className="searched-item-container">
           {this.props.alcApiRes.map(key => {
             return (

@@ -10,15 +10,23 @@ class ScrollPage extends React.Component {
     return (
       <div>
         {this.props.searchData.is_first_page ? (
-          <button disabled>Previous</button>
+          <button className="previous" disabled>
+            <i class="fas fa-arrow-left" />
+          </button>
         ) : (
-          <button onClick={this.handleClick}>Previous</button>
+          <button className="previous" onClick={this.handleClick}>
+            <i class="fas fa-arrow-left" />
+          </button>
         )}
 
         {this.props.searchData.is_final_page ? (
-          <button disabled>Next</button>
+          <button className="next" disabled>
+            <i class="fas fa-arrow-right" />
+          </button>
         ) : (
-          <button onClick={this.handleClick}>Next</button>
+          <button className="next" onClick={this.handleClick}>
+            <i class="fas fa-arrow-right" />
+          </button>
         )}
       </div>
     );

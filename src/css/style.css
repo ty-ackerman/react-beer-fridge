@@ -561,3 +561,7 @@ div.login p.description {
   margin-top: 10px;
   max-height: 30px;
 }
+.next,
+.previous {
+  background-color: #ffd000;
+}
