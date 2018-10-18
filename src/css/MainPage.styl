@@ -18,8 +18,8 @@
     // overflow hidden
     &:hover
         .one-alc-info
-            background-color backgroundBlue
-            color primary
+            // background-color backgroundBlue
+            // color backgroundBlue
         button
             position absolute
             bottom -30px
@@ -29,19 +29,22 @@
         overflow hidden
     &-info
         text-align center
-        background-color lighten(backgroundBlue, 25%)
+        background-color lighten(backgroundBlue, 90%)
+        // filter grayscale(100%)
         border-radius 2px
         // background-color backgroundBlue
-        color white
+        color black
         // font-weight bold
         width 100%
         position relative
         transition transition
         padding 10px 0
+        // overflow hidden
         .origin
+            margin-top 5px
             font-weight bold
         .price
-            margin-bottom 5px
+            font-weight bold
         button
             position absolute
             width 100%
@@ -59,3 +62,8 @@
             &.in-checkout
                 background-color red
                 bottom -30px
+
+.flag
+    width 60px
+    margin-top 10px
+    max-height 30px

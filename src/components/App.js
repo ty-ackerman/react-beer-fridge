@@ -33,8 +33,7 @@ class App extends React.Component {
     user: null,
     ownedByUser: [],
     guest: false,
-    displayFridge: false,
-    flagLoaded: false
+    displayFridge: false
   };
 
   componentDidUpdate() {
@@ -572,15 +571,14 @@ class App extends React.Component {
 
       alcApiRes[item]["origin"] = country;
 
-      this.flagApiCall(country, alcApiRes[item]);
+      // this.flagApiCall(country, alcApiRes[item]);
 
       //The function below will take the alcohol array and country of origin of the alcohol in question and make an API call to the flag API. It will then be added to the itemect of the alcohol
       resultsArray.push(alcApiRes[item]);
     }
     console.log(resultsArray);
     this.setState({
-      alcApiRes: resultsArray,
-      flagLoaded: true
+      alcApiRes: resultsArray
     });
   }
 
@@ -595,17 +593,6 @@ class App extends React.Component {
       }
     }
     return country;
-  }
-
-  flagApiCall(country, alc) {
-    axios({
-      url: `https://restcountries.eu/rest/v2/name/${country}`
-    }).then(res => {
-      //This below will display all the data pretaining to country of the specific alcohol.
-      //For now, all I am returning is the flag of the country in question
-      let flag = res.data["0"].flag;
-      alc["flag"] = flag;
-    });
   }
 
   render() {
@@ -694,7 +681,7 @@ class App extends React.Component {
                 alcSearchData={this.alcSearchData}
                 apiSearch={this.apiSearch}
               />
-              {this.state.alcApiRes.length && this.state.flagLoaded ? (
+              {this.state.alcApiRes.length ? (
                 <DisplaySearchedAlc
                   alcApiRes={this.state.alcApiRes}
                   saveCheckout={this.saveCheckout}
@@ -705,7 +692,7 @@ class App extends React.Component {
                   pageChanger={this.pageChanger}
                   pageLoading={this.state.pageLoading}
                   removeFromCheckout={this.removeFromCheckout}
-                  flagLoaded={this.state.flagLoaded}
+                  // flagApiCall={this.flagApiCall}
                 />
               ) : this.state.suggestion.length ? (
                 <DisplaySuggestion

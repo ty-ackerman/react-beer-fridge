@@ -35,6 +35,7 @@ class DisplaySearchedAlc extends React.Component {
                 checkout={this.props.checkout}
                 objectHasContent={this.props.objectHasContent}
                 removeFromCheckout={this.props.removeFromCheckout}
+                // flagApiCall={this.props.flagApiCall}
               />
             );
           })}

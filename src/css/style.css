@@ -508,10 +508,6 @@ div.login p.description {
           align-items: center;
   z-index: 10;
 }
-.one-alc:hover .one-alc-info {
-  background-color: #3b5998;
-  color: #ffd000;
-}
 .one-alc:hover button {
   position: absolute;
   bottom: -30px;
@@ -523,9 +519,9 @@ div.login p.description {
 }
 .one-alc-info {
   text-align: center;
-  background-color: #5d7dc0;
+  background-color: #e9eef7;
   border-radius: 2px;
-  color: #fff;
+  color: #222;
   width: 100%;
   position: relative;
   -webkit-transition: 0.15s ease-in all;
@@ -533,10 +529,11 @@ div.login p.description {
   padding: 10px 0;
 }
 .one-alc-info .origin {
+  margin-top: 5px;
   font-weight: bold;
 }
 .one-alc-info .price {
-  margin-bottom: 5px;
+  font-weight: bold;
 }
 .one-alc-info button {
   position: absolute;
@@ -558,4 +555,9 @@ div.login p.description {
 .one-alc-info button.in-checkout {
   background-color: #f00;
   bottom: -30px;
+}
+.flag {
+  width: 60px;
+  margin-top: 10px;
+  max-height: 30px;
 }
