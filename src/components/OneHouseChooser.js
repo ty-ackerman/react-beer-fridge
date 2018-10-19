@@ -13,7 +13,11 @@ class OneHouseChooser extends React.Component {
     if (fridge) {
       Object.keys(fridge).map(stats => {
         if (images.length < 4) {
-          images.push(fridge[stats].image_thumb_url);
+          if (fridge[stats].image_thumb_url) {
+            images.push(fridge[stats].image_thumb_url);
+          } else {
+            images.push("./assets/no-image.jpeg");
+          }
         }
         return null;
       });

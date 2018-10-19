@@ -38,7 +38,10 @@ class BeerFridgeOneAlc extends React.Component {
         <h2>{name}</h2>
         <button onClick={this.handleRemove}>&times;</button>
         <p>{purchase_remaining}</p>
-        <img src={image_thumb_url} alt={name} />
+        <img
+          src={image_thumb_url ? image_thumb_url : "./assets/no-image.jpeg"}
+          alt={name}
+        />
         {purchase_remaining !== 1 ? (
           package_unit_type === "box" ? (
             <p>
