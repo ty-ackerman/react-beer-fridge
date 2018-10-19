@@ -10,9 +10,8 @@ class DisplaySuggestion extends React.Component {
   render() {
     const alcName = this.props.suggestion;
     return (
-      <div>
-        <h2>Display Suggestion</h2>
-        <p>
+      <div className="suggestion-wrapper">
+        <p className="suggestion">
           Did you mean: <span onClick={this.handleClick}>{alcName}</span>
         </p>
         <p>No results containing your search terms were found.</p>

@@ -7,8 +7,7 @@ class SimpleSearch extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Simple Search</h2>
+      <div className="simple-search">
         <form action="" onSubmit={e => this.props.apiSearch(e, this.alcInput)}>
           <input
             type="text"
@@ -16,7 +15,6 @@ class SimpleSearch extends React.Component {
             required
             ref={this.alcInput}
           />
-          <button type="submit">Submit</button>
         </form>
       </div>
     );

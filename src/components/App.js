@@ -327,6 +327,7 @@ class App extends React.Component {
       alcApiRes,
       displayFridge: true
     });
+    window.scrollTo(0, 0);
   };
 
   drinkFridge = key => {

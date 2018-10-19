@@ -246,6 +246,30 @@ h3 {
 p {
   margin: 0;
 }
+.checkout {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background: rgba(220,220,220,0.5);
+}
+.save-checkout {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  padding: 20px 0;
+  background-color: #91d553;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2.5rem;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.save-checkout:hover {
+  background-color: #ade07e;
+}
 .logout-button {
   right: 20px;
   top: 20px;
@@ -333,7 +357,7 @@ form .form-input-container input[type="text"] {
           filter: grayscale(0);
 }
 .one-house:hover .select {
-  bottom: 0;
+  bottom: 10px;
   -webkit-filter: grayscale(0);
           filter: grayscale(0);
 }
@@ -375,6 +399,7 @@ form .form-input-container input[type="text"] {
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
   cursor: pointer;
+  font-weight: bold;
   -webkit-transition: 0.15s ease-in all;
   transition: 0.15s ease-in all;
 }
@@ -384,7 +409,7 @@ form .form-input-container input[type="text"] {
 .no-items {
   color: #ffd000;
   position: absolute;
-  top: -50px;
+  top: -30px;
 }
 .name-taken {
   color: #f00;
@@ -491,10 +516,11 @@ div.login p.description {
           flex-flow: row wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  padding-left: 0;
 }
 .one-alc {
   width: 30%;
-  margin-top: 20px;
+  margin-bottom: 20px;
   height: 550px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -561,7 +587,78 @@ div.login p.description {
   margin-top: 10px;
   max-height: 30px;
 }
+.simple-search form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin: 40px 0;
+}
+.simple-search form input {
+  border: none;
+  background-color: #fffae5;
+  width: 50%;
+  text-align: center;
+  font-size: 2.8rem;
+}
 .next,
 .previous {
   background-color: #ffd000;
+  font-size: 2.5rem;
+  border: none;
+  color: #fff;
+  margin: 0 10px;
+}
+.next[disabled],
+.previous[disabled] {
+  background: #d3d3d3;
+}
+.scroll-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.results-found {
+  color: #b3b3b3;
+  font-style: italic;
+  text-align: center;
+  position: relative;
+  bottom: 35px;
+}
+.total-pages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #222;
+  font-weight: bold;
+}
+.suggestion span {
+  color: #f00;
+  font-style: italic;
+  cursor: pointer;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.suggestion-wrapper {
+  text-align: center;
+  position: relative;
+  bottom: 35px;
 }

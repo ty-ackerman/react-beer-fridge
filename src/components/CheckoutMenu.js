@@ -8,7 +8,7 @@ class CheckoutMenu extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="checkout">
         <h2>CheckoutMenu</h2>
         {Object.keys(this.props.checkout).map(key => {
           return (
@@ -21,7 +21,9 @@ class CheckoutMenu extends React.Component {
             />
           );
         })}
-        <button onClick={this.handleClick}>Put it on ice!</button>
+        <button className="save-checkout" onClick={this.handleClick}>
+          Save Alcohol
+        </button>
       </div>
     );
   }

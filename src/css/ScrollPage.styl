@@ -1,2 +1,37 @@
 .next, .previous
     background-color primary
+    font-size 2.5rem
+    border none
+    color white
+    margin 0 10px
+    &[disabled] 
+        background lightgray
+.scroll-container
+    display flex
+    flex-flow row wrap
+    justify-content center
+
+.results-found
+    color lighten(gray, 40%)
+    font-style italic
+    text-align center
+    position relative
+    bottom 35px
+
+.total-pages
+    display flex
+    justify-content center
+    align-items center
+    color black
+    font-weight bold
+
+.suggestion span
+    color red
+    font-style italic
+    cursor pointer
+    transition transition
+
+.suggestion-wrapper
+    text-align center
+    position relative
+    bottom 35px

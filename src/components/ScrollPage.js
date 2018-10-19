@@ -13,7 +13,7 @@ class ScrollPage extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="scroll-container">
         {this.props.searchData.is_first_page ? (
           <button className="previous" disabled>
             <i class="fas fa-arrow-left" />
@@ -23,7 +23,9 @@ class ScrollPage extends React.Component {
             <i class="fas fa-arrow-left" />
           </button>
         )}
-
+        <p className="total-pages">
+          Page {this.props.currentPage} of {this.props.searchData.total_pages}
+        </p>
         {this.props.searchData.is_final_page ? (
           <button className="next" disabled>
             <i class="fas fa-arrow-right" />
