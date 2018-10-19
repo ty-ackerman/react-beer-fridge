@@ -1,8 +1,13 @@
 import React from "react";
 
 class ScrollPage extends React.Component {
-  handleClick = e => {
-    const instructions = e.target.textContent;
+  handleNext = () => {
+    const instructions = "Next";
+    this.props.pageChanger(instructions);
+  };
+
+  handleLast = () => {
+    const instructions = "Last";
     this.props.pageChanger(instructions);
   };
 
@@ -14,7 +19,7 @@ class ScrollPage extends React.Component {
             <i class="fas fa-arrow-left" />
           </button>
         ) : (
-          <button className="previous" onClick={this.handleClick}>
+          <button className="previous" onClick={this.handleLast}>
             <i class="fas fa-arrow-left" />
           </button>
         )}
@@ -24,7 +29,7 @@ class ScrollPage extends React.Component {
             <i class="fas fa-arrow-right" />
           </button>
         ) : (
-          <button className="next" onClick={this.handleClick}>
+          <button className="next" onClick={this.handleNext}>
             <i class="fas fa-arrow-right" />
           </button>
         )}
