@@ -439,11 +439,20 @@ div.login {
   background: #fff;
   padding: 50px;
   width: 100%;
-  height: calc(100vh - 300px);
   margin: 150px auto;
   -webkit-box-shadow: 2px 2px 5px #222;
           box-shadow: 2px 2px 5px #222;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 div.login p.description {
   width: 75%;
@@ -453,11 +462,10 @@ div.login p.description {
   color: #222;
 }
 .login .buttonContainer {
-  width: 100%;
-  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column wrap;
@@ -466,10 +474,6 @@ div.login p.description {
       -ms-flex-align: center;
           align-items: center;
   font-size: 2.5rem;
-  bottom: 50px;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  left: 50%;
 }
 .login .buttonContainer button {
   width: 50%;
