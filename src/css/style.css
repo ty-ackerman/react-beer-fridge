@@ -28,7 +28,7 @@
 .defaultButton {
   position: absolute;
   padding: 10px 25px;
-  background: #ffd000;
+  background: #ffb30f;
   border: none;
   color: #fff;
   font-weight: bold;
@@ -36,7 +36,7 @@
   transition: 0.15s ease-in all;
 }
 .defaultButton:hover {
-  background-color: #ffdc40;
+  background-color: #ffc64b;
 }
 .backButton {
   right: 140px;
@@ -45,6 +45,9 @@
 .changeDisplayButton {
   top: 20px;
   left: 20px;
+}
+body {
+  background-image: url("./assets/light-blue-argyle.jpg");
 }
 h1,
 h2,
@@ -223,7 +226,7 @@ html {
 }
 body {
   font-size: 1.6rem;
-  background-color: #3b5998;
+  background-color: #437f97;
   margin: 0 auto;
   width: 70%;
   max-width: 1200px;
@@ -231,7 +234,7 @@ body {
 h1 {
   font-size: 6rem;
   text-shadow: 2px 2px #4b4e6d;
-  color: #ffd000;
+  color: #ffb30f;
   text-align: center;
   line-height: 60px;
   margin: 0;
@@ -253,8 +256,8 @@ p {
   bottom: 1%;
   width: 17%;
   background: rgba(220,220,220,0.7);
-  -webkit-box-shadow: 1px 10px 10px #222;
-          box-shadow: 1px 10px 10px #222;
+  -webkit-box-shadow: 1px 5px 10px #222;
+          box-shadow: 1px 5px 10px #222;
   overflow: hidden;
 }
 .save-checkout {
@@ -405,7 +408,7 @@ p {
   width: 100%;
   text-align: center;
   margin: 30px 0;
-  color: #ffd000;
+  color: #ffb30f;
   text-shadow: 1px 1px #4b4e6d;
   font-weight: bold;
 }
@@ -422,7 +425,7 @@ form .form-input-container {
   margin-bottom: 40px;
 }
 form .form-input-container input[type="text"] {
-  background-color: #fffae5;
+  background-color: #fff7e7;
   border: none;
   width: 50%;
   text-align: center;
@@ -508,7 +511,7 @@ form .form-input-container input[type="text"] {
   position: absolute;
   bottom: -60px;
   padding: 5px 15px;
-  background-color: #ffd000;
+  background-color: #ffb30f;
   color: #fff;
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
@@ -518,10 +521,10 @@ form .form-input-container input[type="text"] {
   transition: 0.15s ease-in all;
 }
 .select:hover {
-  background-color: #ffdc40;
+  background-color: #ffc64b;
 }
 .no-items {
-  color: #ffd000;
+  color: #ffb30f;
   position: absolute;
   top: -30px;
 }
@@ -663,7 +666,7 @@ div.login p.description {
 }
 .one-alc-info {
   text-align: center;
-  background-color: #e9eef7;
+  background-color: #ebf3f6;
   border-radius: 2px;
   color: #222;
   width: 100%;
@@ -684,7 +687,7 @@ div.login p.description {
   width: 100%;
   bottom: 0;
   left: 0;
-  background: #ffd000;
+  background: #ffb30f;
   color: #fff;
   border: none;
   font-weight: bold;
@@ -694,7 +697,7 @@ div.login p.description {
   transition: 0.15s ease-in all;
 }
 .one-alc-info button:hover {
-  background-color: #ffdc40;
+  background-color: #ffc64b;
 }
 .one-alc-info button.in-checkout {
   background-color: #f00;
@@ -719,14 +722,14 @@ div.login p.description {
 }
 .simple-search form input {
   border: none;
-  background-color: #fffae5;
+  background-color: #fff7e7;
   width: 50%;
   text-align: center;
   font-size: 2.8rem;
 }
 .next,
 .previous {
-  background-color: #ffd000;
+  background-color: #ffb30f;
   font-size: 2.5rem;
   border: none;
   color: #fff;
