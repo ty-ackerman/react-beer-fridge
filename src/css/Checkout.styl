@@ -1,10 +1,13 @@
 .checkout
     position fixed
     right 0
-    top 0
-    bottom 0
-    width 15%
-    background rgba(220,220,220,.5)
+    top 1%
+    bottom 1%
+    width 17%
+    background rgba(220,220,220,.7)
+    box-shadow: 1px 10px 10px black
+    overflow hidden
+    // background green
 
 .save-checkout
     position absolute
@@ -19,3 +22,89 @@
     transition transition
     &:hover
         background-color lighten(#91d553, 25%)
+
+.checkout h1
+    font-size 2.5rem
+    background white
+    padding-bottom 20px
+
+.one-alc-checkout
+    padding 10px 0
+    background white
+    border-bottom 1px dashed black
+    position relative
+    .image-container
+        float left
+        width 50px
+        margin-right: 10px
+        margin-left 5px
+        img
+            max-width 100%
+    .text-container
+        width calc(100% - 100px)
+        float left
+        display flex
+        flex-flow column wrap
+        .alcName
+            font-weight bold
+    .subtract, .add
+        color white
+        border none
+        font-weight bold
+        width 20px
+        height 20px
+        text-align center
+        padding 0
+        line-height 15px
+        transition transition
+    .subtract
+        background-color lighten(red, 25%)
+        &:hover
+            background-color lighten(red, 50%)
+        &[disabled]
+            background-color lighten(red, 75%)
+    .add
+        background-color lighten(green, 25%)
+        &:hover
+            background-color lighten(green, 40%)
+.remove
+    position absolute
+    top 10px
+    right 5px
+    border none
+    color white
+    font-weight bold
+    background lighten(red, 25%)
+    transition transition
+    &:hover
+        background lighten(red, 50%)
+
+.total-container
+    position absolute
+    bottom 74px
+    background white
+    width 100%
+    height 70px
+    padding 10px 10px
+    p 
+        font-weight bold
+        position relative
+        // border black solid 1px
+        height 100%
+        span
+            font-size 3rem
+            text-align center
+            // border black solid 1px
+            position absolute
+            bottom 0
+            right 20px
+
+.purchase-quant
+    margin-top 5px
+    display flex
+    align-items flex-end
+    p 
+        font-size 2rem
+        width 30px
+        text-align center
+        line-height 2rem

@@ -33,7 +33,8 @@ class App extends React.Component {
     user: null,
     ownedByUser: [],
     guest: false,
-    displayFridge: false
+    displayFridge: false,
+    checkoutTotal: 0
   };
 
   componentDidUpdate() {
@@ -230,9 +231,11 @@ class App extends React.Component {
   saveCheckout = (key, id) => {
     let currentCheckout = { ...this.state.checkout };
     let fridge = { ...this.state.fridge };
+    let checkoutTotal = this.state.checkoutTotal;
     currentCheckout[id] = key[id];
     currentCheckout[id]["purchase_quantity"] = 1;
     currentCheckout[id]["in_checkout"] = true;
+    const price = currentCheckout[id].price_in_cents;
     if (currentCheckout[id].package_unit_type === "bagnbox") {
       currentCheckout[id].package_unit_type = "box";
     }
@@ -242,9 +245,11 @@ class App extends React.Component {
       }
       return null;
     });
+    checkoutTotal += price;
     this.setState({
       checkout: currentCheckout,
-      fridge
+      fridge,
+      checkoutTotal
     });
   };
 
@@ -268,11 +273,21 @@ class App extends React.Component {
     });
   };
 
-  removeFromCheckout = key => {
+  updateCheckoutTotal = (sign, price) => {
+    let checkoutTotal = this.state.checkoutTotal;
+    sign === "+" ? (checkoutTotal += price) : (checkoutTotal -= price);
+    this.setState({
+      checkoutTotal
+    });
+  };
+
+  removeFromCheckout = (key, item) => {
     let checkoutCurrentState = { ...this.state.checkout };
     let searchCurrentStateObj = this.state.alcApiRes;
     let searchCurrentState = { ...searchCurrentStateObj };
     let fridge = { ...this.state.fridge };
+    let checkoutTotal = this.state.checkoutTotal;
+    checkoutTotal -= item.purchase_quantity * item.price_in_cents;
     delete checkoutCurrentState[key];
     Object.keys(searchCurrentState).map(index => {
       if (searchCurrentState[index].id === parseInt(key, 0)) {
@@ -290,7 +305,8 @@ class App extends React.Component {
     this.setState({
       checkout: checkoutCurrentState,
       alcApiRes: searchCurrentStateObj,
-      fridge
+      fridge,
+      checkoutTotal
     });
   };
 
@@ -325,7 +341,8 @@ class App extends React.Component {
       checkout,
       fridge,
       alcApiRes,
-      displayFridge: true
+      displayFridge: true,
+      checkoutTotal: 0
     });
     window.scrollTo(0, 0);
   };
@@ -712,6 +729,8 @@ class App extends React.Component {
               changeQuantCheckout={this.changeQuantCheckout}
               removeFromCheckout={this.removeFromCheckout}
               saveToFridge={this.saveToFridge}
+              checkoutTotal={this.state.checkoutTotal}
+              updateCheckoutTotal={this.updateCheckoutTotal}
             />
           ) : null}
         </div>

@@ -57,13 +57,15 @@ class OneAlc extends React.Component {
           <img
             className="flag"
             src={this.state.flag ? this.state.flag : null}
-            alt={`${origin} flag`}
+            alt=""
           />
           <button>{in_checkout ? <p>In Checkout</p> : <p />}</button>
           {in_checkout ? (
             <button
               className="in-checkout"
-              onClick={() => this.props.removeFromCheckout(id)}
+              onClick={() =>
+                this.props.removeFromCheckout(id, this.props.index)
+              }
             >
               Remove from Cart
             </button>
