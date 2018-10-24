@@ -15,6 +15,7 @@ class BeerFridge extends React.Component {
                 index={key}
                 drinkFridge={this.props.drinkFridge}
                 removeFromFridge={this.props.removeFromFridge}
+                removeFromCheckout={this.props.removeFromCheckout}
                 saveCheckout={this.props.saveCheckout}
                 showMoreInfo={this.props.showMoreInfo}
                 changeShowMoreInfoState={this.props.changeShowMoreInfoState}

@@ -39,38 +39,52 @@ class BeerFridgeOneAlc extends React.Component {
         <button className="remove" onClick={this.handleRemove}>
           &times;
         </button>
-        <p>{purchase_remaining}</p>
         <div className="alc-image-container">
           <img
             src={image_thumb_url ? image_thumb_url : "./assets/no-image.jpeg"}
             alt={name}
           />
         </div>
-        {purchase_remaining !== 1 ? (
-          package_unit_type === "box" ? (
-            <p>
-              {purchase_remaining} {package_unit_type + "es"} remaining
-            </p>
+        <div className="info-container">
+          {purchase_remaining !== 1 ? (
+            package_unit_type === "box" ? (
+              <p className="remaining">
+                {purchase_remaining} {package_unit_type + "es"} remaining
+              </p>
+            ) : (
+              <p className="remaining">
+                {purchase_remaining} {package_unit_type + "s"} remaining
+              </p>
+            )
           ) : (
-            <p>
-              {purchase_remaining} {package_unit_type + "s"} remaining
+            <p className="remaining">
+              {purchase_remaining} {package_unit_type} remaining
             </p>
-          )
-        ) : (
-          <p>
-            {purchase_remaining} {package_unit_type} remaining
-          </p>
-        )}
-        {purchase_remaining > 0 ? (
-          <button onClick={this.handleDecrease}>Drink Summm</button>
-        ) : null}
+          )}
+          {purchase_remaining > 0 ? (
+            <button onClick={this.handleDecrease}>Drink Summm</button>
+          ) : (
+            <button disabled="disabled" onClick={this.handleDecrease}>
+              Drink Summm
+            </button>
+          )}
 
-        {!in_checkout ? (
-          <button onClick={this.handleMore}>Order More</button>
-        ) : (
-          <p>In Checkout!!</p>
-        )}
-        <button onClick={this.handleMoreInfo}>More Info</button>
+          {!in_checkout ? (
+            <button onClick={this.handleMore}>Order More</button>
+          ) : (
+            <button
+              onClick={() =>
+                this.props.removeFromCheckout(
+                  this.props.index,
+                  this.props.fridge[this.props.index]
+                )
+              }
+            >
+              Remove
+            </button>
+          )}
+          <button onClick={this.handleMoreInfo}>More Info</button>
+        </div>
       </div>
     );
   }

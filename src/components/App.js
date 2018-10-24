@@ -686,6 +686,7 @@ class App extends React.Component {
               saveCheckout={this.saveCheckout}
               showMoreInfo={this.state.showMoreInfo}
               changeShowMoreInfoState={this.changeShowMoreInfoState}
+              removeFromCheckout={this.removeFromCheckout}
             />
           ) : (
             <React.Fragment>

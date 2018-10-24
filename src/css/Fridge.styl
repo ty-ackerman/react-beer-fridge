@@ -1,12 +1,11 @@
 .fridge-alc-container
     display flex
     flex-flow row wrap
-    justify-content space-between
+    justify-content space-around
     align-items center
 
 .fridge-one-alc-container
     position relative
-    border 1px solid black
     width 30%
     margin-bottom: 20px
     height: 550px
@@ -16,6 +15,11 @@
         font-size 2.5rem
         height 7rem
         overflow hidden
+        padding 0 30px
+    .remove
+        opacity 0
+    &:hover .remove
+        opacity 1       
 
 .alc-image-container
     width 100%

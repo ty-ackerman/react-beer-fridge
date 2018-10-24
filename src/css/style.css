@@ -399,16 +399,14 @@ h3 {
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 .fridge-one-alc-container {
   position: relative;
-  border: 1px solid #222;
   width: 30%;
   margin-bottom: 20px;
   height: 550px;
@@ -424,6 +422,13 @@ h3 {
   font-size: 2.5rem;
   height: 7rem;
   overflow: hidden;
+  padding: 0 30px;
+}
+.fridge-one-alc-container .remove {
+  opacity: 0;
+}
+.fridge-one-alc-container:hover .remove {
+  opacity: 1;
 }
 .alc-image-container {
   width: 100%;
@@ -833,6 +838,9 @@ div.login p.description {
   cursor: pointer;
   -webkit-transition: 0.15s ease-in all;
   transition: 0.15s ease-in all;
+}
+.suggestion span:hover {
+  color: #ffbfbf;
 }
 .suggestion-wrapper {
   text-align: center;
