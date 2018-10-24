@@ -46,33 +46,42 @@ class BeerFridgeOneAlc extends React.Component {
           />
         </div>
         <div className="info-container">
+          {purchase_remaining > 0 ? (
+            <button className="less" onClick={this.handleDecrease}>
+              -
+            </button>
+          ) : (
+            <button
+              className="less"
+              disabled="disabled"
+              onClick={this.handleDecrease}
+            >
+              -
+            </button>
+          )}
           {purchase_remaining !== 1 ? (
             package_unit_type === "box" ? (
               <p className="remaining">
-                {purchase_remaining} {package_unit_type + "es"} remaining
+                {purchase_remaining} {package_unit_type + "es"}
               </p>
             ) : (
               <p className="remaining">
-                {purchase_remaining} {package_unit_type + "s"} remaining
+                {purchase_remaining} {package_unit_type + "s"}
               </p>
             )
           ) : (
             <p className="remaining">
-              {purchase_remaining} {package_unit_type} remaining
+              {purchase_remaining} {package_unit_type}
             </p>
-          )}
-          {purchase_remaining > 0 ? (
-            <button onClick={this.handleDecrease}>Drink Summm</button>
-          ) : (
-            <button disabled="disabled" onClick={this.handleDecrease}>
-              Drink Summm
-            </button>
           )}
 
           {!in_checkout ? (
-            <button onClick={this.handleMore}>Order More</button>
+            <button className="more" onClick={this.handleMore}>
+              +
+            </button>
           ) : (
             <button
+              className="undo"
               onClick={() =>
                 this.props.removeFromCheckout(
                   this.props.index,
@@ -80,11 +89,13 @@ class BeerFridgeOneAlc extends React.Component {
                 )
               }
             >
-              Remove
+              Undo
             </button>
           )}
-          <button onClick={this.handleMoreInfo}>More Info</button>
         </div>
+        <button className="more-info" onClick={this.handleMoreInfo}>
+          More Info
+        </button>
       </div>
     );
   }

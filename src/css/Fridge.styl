@@ -19,8 +19,10 @@
     .remove
         opacity 0
     &:hover .remove
-        opacity 1       
+        opacity 1  
 
+    &:hover .more-info
+        bottom 0    
 .alc-image-container
     width 100%
     display flex
@@ -29,3 +31,55 @@
 img
     max-width 100%
 
+.fridge-one-alc-container .info-container
+    display flex
+    flex-flow row wrap
+    justify-content space-between
+    align-items flex-end
+    z-index 10
+    background white
+    button
+        width 40px
+        font-size 2.5rem
+        height 35px
+        line-height: 10px
+        border none
+        color white
+        transition background-color .15s ease-in
+        &.more
+            background-color lighten(green, 25%)
+            &:hover
+                background-color lighten(green, 40%)
+        &.less
+            background-color lighten(red, 25%)
+            &:hover
+                background-color lighten(red, 50%)
+            &[disabled]
+                background-color lighten(red, 75%)
+    p
+        font-size 3rem
+
+
+
+
+.more-info
+    position relative
+    bottom 32px
+    z-index 1
+    border none
+    background-color primary
+    color white
+    font-weight bold
+    padding 5px 0
+    transition transition
+    &:hover
+        background-color lighten(primary, 25%)
+
+
+button.undo
+    background-color darken(orange, 0%)
+    font-size 1.3rem !important
+    padding 0
+    transition transition
+    &:hover
+        background-color lighten(orange, 25%)

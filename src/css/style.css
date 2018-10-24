@@ -430,6 +430,9 @@ h3 {
 .fridge-one-alc-container:hover .remove {
   opacity: 1;
 }
+.fridge-one-alc-container:hover .more-info {
+  bottom: 0;
+}
 .alc-image-container {
   width: 100%;
   display: -webkit-box;
@@ -441,6 +444,76 @@ h3 {
 }
 img {
   max-width: 100%;
+}
+.fridge-one-alc-container .info-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  z-index: 10;
+  background: #fff;
+}
+.fridge-one-alc-container .info-container button {
+  width: 40px;
+  font-size: 2.5rem;
+  height: 35px;
+  line-height: 10px;
+  border: none;
+  color: #fff;
+  -webkit-transition: background-color 0.15s ease-in;
+  transition: background-color 0.15s ease-in;
+}
+.fridge-one-alc-container .info-container button.more {
+  background-color: #00e000;
+}
+.fridge-one-alc-container .info-container button.more:hover {
+  background-color: #1aff1a;
+}
+.fridge-one-alc-container .info-container button.less {
+  background-color: #ff4040;
+}
+.fridge-one-alc-container .info-container button.less:hover {
+  background-color: #ff8080;
+}
+.fridge-one-alc-container .info-container button.less[disabled] {
+  background-color: #ffbfbf;
+}
+.fridge-one-alc-container .info-container p {
+  font-size: 3rem;
+}
+.more-info {
+  position: relative;
+  bottom: 32px;
+  z-index: 1;
+  border: none;
+  background-color: #6886c4;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 0;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.more-info:hover {
+  background-color: #8ea4d3;
+}
+button.undo {
+  background-color: #ffa500;
+  font-size: 1.3rem !important;
+  padding: 0;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+button.undo:hover {
+  background-color: #ffbc40;
 }
 .logout-button {
   right: 20px;
