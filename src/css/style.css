@@ -409,7 +409,7 @@ h3 {
   position: relative;
   width: 30%;
   margin-bottom: 20px;
-  height: 550px;
+  border-radius: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -417,6 +417,8 @@ h3 {
   -webkit-box-direction: normal;
       -ms-flex-flow: column wrap;
           flex-flow: column wrap;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
 }
 .fridge-one-alc-container h2 {
   font-size: 2.5rem;
@@ -514,6 +516,12 @@ button.undo {
 }
 button.undo:hover {
   background-color: #ffbc40;
+}
+.current-inventory-title {
+  margin: 30px 0;
+  font-size: 3rem;
+  color: #6886c4 !important;
+  text-shadow: #4b4e6d 1px 1px;
 }
 .logout-button {
   right: 20px;
@@ -854,6 +862,68 @@ div.login p.description {
   width: 50%;
   text-align: center;
   font-size: 2.8rem;
+}
+.more-info-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 100;
+}
+.more-info-container .more-info-content {
+  width: 65%;
+  margin: 100px auto;
+  background: #fff;
+  height: calc(100vh - 200px);
+  padding: 50px;
+  position: relative;
+}
+.close-more-info {
+  color: #fff;
+  background: #f00;
+  border: none;
+  padding: 5px 15px;
+  font-weight: bold;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  -webkit-transition: 0.15s ease-in all;
+  transition: 0.15s ease-in all;
+}
+.close-more-info:hover {
+  background: #ff4040;
+}
+.more-info-content .wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.more-info-content .alc-title {
+  font-size: 3rem;
+}
+.more-info-content .alc-subtitle {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.more-info-content-left {
+  width: 35%;
+}
+.more-info-content-left .alc-image-container {
+  width: 100%;
+}
+.more-info-content-right {
+  width: 60%;
+  margin-top: 30px;
 }
 .next,
 .previous {

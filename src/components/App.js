@@ -621,24 +621,7 @@ class App extends React.Component {
           loginAsGuest={this.loginAsGuest}
         />
       );
-    }
-
-    // else if (this.state.guest && !this.state.houseId) {
-    //   return (
-    //     <React.Fragment>
-    //       <Logout logMeOut={this.logMeOut} />
-    //       <GuestLogin
-    //         nameAllowed={this.nameAllowed}
-    //         addOwnerToHouse={this.addOwnerToHouse}
-    //         getHouseId={this.getHouseId}
-    //         makeEmailUid={this.makeEmailUid}
-    //         uid={this.state.uid}
-    //         signInAnon={this.signInAnon}
-    //       />
-    //     </React.Fragment>
-    //   );
-    // }
-    else if (this.state.uid && !this.state.houseId) {
+    } else if (this.state.uid && !this.state.houseId) {
       return (
         <HouseChooser
           getHouseId={this.getHouseId}
@@ -675,6 +658,7 @@ class App extends React.Component {
             <MoreInfo
               showMoreInfoId={this.state.showMoreInfoId}
               fridge={this.state.fridge}
+              changeShowMoreInfoState={this.changeShowMoreInfoState}
             />
           ) : null}
           {this.objectHasContent(this.state.fridge) &&

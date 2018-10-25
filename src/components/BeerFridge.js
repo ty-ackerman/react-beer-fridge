@@ -5,7 +5,7 @@ class BeerFridge extends React.Component {
   render() {
     return (
       <div>
-        <h2>Current Inventory</h2>
+        <h2 className="current-inventory-title">Current Inventory</h2>
         <div className="fridge-alc-container">
           {Object.keys(this.props.fridge).map(key => {
             return (
