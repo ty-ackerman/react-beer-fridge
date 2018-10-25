@@ -1,13 +1,30 @@
 import React from "react";
 
 class MoreInfo extends React.Component {
+  alcoholPercent = number => {
+    const num = number.toString();
+    let numLength = num.length;
+    let newNum = "";
+    for (let i in num) {
+      if (numLength === 1) {
+        null;
+      } else if (numLength !== 2) {
+        newNum += num[i];
+      } else {
+        newNum += `.${num[i]}`;
+      }
+      numLength--;
+    }
+
+    return `${newNum}%`;
+  };
+
   render() {
     const {
       name,
       alcohol_content,
       image_url,
       origin,
-      price_in_cents,
       primary_category,
       producer_name,
       serving_suggestion,
@@ -45,9 +62,20 @@ class MoreInfo extends React.Component {
               <p className="origin">
                 Origin: <span>{origin}</span>
               </p>
+              {alcohol_content ? (
+                <p className="alcohol_content">
+                  Alcohol Content:{" "}
+                  <span>{this.alcoholPercent(alcohol_content)}</span>
+                </p>
+              ) : null}
               {varietal ? (
                 <p className="varietal">
                   Varietal: <span>{varietal}</span>
+                </p>
+              ) : null}
+              {style ? (
+                <p className="style">
+                  Style: <span>{style}</span>
                 </p>
               ) : null}
               {tasting_note ? (

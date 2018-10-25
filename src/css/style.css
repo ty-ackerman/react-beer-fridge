@@ -895,6 +895,9 @@ div.login p.description {
 .close-more-info:hover {
   background: #ff4040;
 }
+.more-info-content {
+  z-index: 100;
+}
 .more-info-content .wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -923,7 +926,14 @@ div.login p.description {
 }
 .more-info-content-right {
   width: 60%;
-  margin-top: 30px;
+  margin-top: 20px;
+}
+.more-info-content-right p {
+  margin: 10px 0;
+  font-weight: bold;
+}
+.more-info-content-right p span {
+  font-weight: normal;
 }
 .next,
 .previous {
