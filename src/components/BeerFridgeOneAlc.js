@@ -24,7 +24,7 @@ class BeerFridgeOneAlc extends React.Component {
   render() {
     const {
       // alcohol_content,
-      image_thumb_url,
+      image_url,
       name,
       package_unit_type,
       // purchase_quantity,
@@ -41,7 +41,7 @@ class BeerFridgeOneAlc extends React.Component {
         </button>
         <div className="alc-image-container">
           <img
-            src={image_thumb_url ? image_thumb_url : "./assets/no-image.jpeg"}
+            src={image_url ? image_url : "./assets/no-image.jpeg"}
             alt={name}
           />
         </div>

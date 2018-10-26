@@ -13,10 +13,11 @@ class Login extends React.Component {
           On The Wall
         </h1>
         <p className="description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod
-          assumenda minus illum voluptatum atque quae ipsa aperiam qui est
-          fugit? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-          Velit, similique.
+          Search Alcohol - Save Alcohol - Track Alcohol
+          <br />
+          <span className="tagline">It's that simple.</span>
+          <br />
+          The only app you need for managing your alochol inventory
         </p>
         <div className="buttonContainer">
           <button

@@ -32,15 +32,12 @@ class CheckoutOneAlc extends React.Component {
       price_in_cents,
       purchase_quantity,
       name,
-      image_thumb_url
+      image_url
     } = this.props.checkout[this.props.index];
     return (
       <div className="one-alc-checkout clearfix">
         <div className="image-container">
-          <img
-            src={image_thumb_url ? image_thumb_url : "./assets/no-image.jpeg"}
-            alt=""
-          />
+          <img src={image_url ? image_url : "./assets/no-image.jpeg"} alt="" />
         </div>
         <div className="text-container">
           <p className="alcName">{name}</p>

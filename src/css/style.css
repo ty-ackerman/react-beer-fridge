@@ -760,6 +760,10 @@ div.login p.description {
 .login .buttonContainer button.twitter:hover {
   background-color: #71b5e0;
 }
+.tagline {
+  font-weight: bold;
+  line-height: 50px;
+}
 .page-name {
   margin-top: 40px;
 }
@@ -777,8 +781,7 @@ div.login p.description {
 }
 .one-alc {
   width: 30%;
-  margin-bottom: 20px;
-  height: 550px;
+  margin-bottom: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -803,7 +806,6 @@ div.login p.description {
 .one-alc-info {
   text-align: center;
   background-color: #ebf3f6;
-  border-radius: 2px;
   color: #222;
   width: 100%;
   position: relative;
