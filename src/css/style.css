@@ -48,6 +48,7 @@
 }
 body {
   background: url("./assets/light-wood.jpg") 0px -60px;
+  background-attachment: fixed;
 }
 h1,
 h2,
