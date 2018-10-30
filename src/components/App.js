@@ -164,7 +164,7 @@ class App extends React.Component {
           url: "https://lcboapi.com/products",
           params: {
             access_key:
-              "MDoxNDEyMWE4Ni01ZGZiLTExZTgtYTVjYi1jN2JlMmFhMTZiNmQ6SzlralhKWGRwNWVXclp0R1VhcEJFNUU3WWRaTFVLTWkxRW5l",
+              "MDpiM2MyMDE4MC1kYzg3LTExZTgtODVlZC1kYmVmOWZkYjRhMzc6T3lMRnlOYkVXZ2tFcjRwajVEdXVDZjNzSlNrcU1NcWFhOUE0",
             q: alcName,
             page: this.state.currentPage
           }
@@ -179,9 +179,7 @@ class App extends React.Component {
           }
           this.alcSearchData(res.data.pager);
           pageLoading = false;
-          this.setState({
-            pageLoading
-          });
+          this.setState({ pageLoading });
         });
       }
     );
